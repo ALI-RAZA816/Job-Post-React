@@ -1,0 +1,148 @@
+.right_box > div button:first-child:focus,
+.right_box > div button:first-child{
+    background-color: #BAC1FF !important;
+    color:#3a35c9 !important;
+    border-color: #BAC1FF !important;
+    font-weight: bold;
+    width:250px;
+}
+
+.right_box > div button:first-child:hover{
+    background-color: #abb3f8 !important;
+}
+
+.right_box > div button:last-child:focus,
+.right_box > div button:last-child{
+    border-color: #3FDEA3 !important;
+    color: #3FDEA3 !important;
+    font-weight: bold;
+    width:250px;
+}
+
+.right_box > div button:last-child:hover{
+    background-color: #3fdea43d;
+}
+
+.hiringBox{
+    padding:8rem 0 5rem 0;
+}
+
+.hiringHd{
+    color:#DAE2FD;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hiringTxt{
+    text-align: center;
+    color:#C7C4D7;
+    font-size: 1.1rem;
+}
+
+.cards_content:hover{
+    transform: scale(1.02);
+    border-color: #BAC1FF;
+}
+.cards_content{
+    border-radius: 10px;
+    border: 1px solid #efefef33;
+    background-color:#182234 ;
+    transition: transform .20s ease;
+}
+
+.user_icon{
+    height:50px;
+    width:50px;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#293348;
+    border: 1px solid #efefef33;
+}
+
+.userIcon{
+    color:#abb3f8;
+    font-size: 1.6rem;
+}
+
+.cards_content div > span{
+    color: #c2c8da;font-weight: bold;
+    font-size:1.4rem;
+}
+
+.cards_content div > p{
+    color:#888a94;
+    line-height:25px;
+    font-size: 16px;
+}
+
+.tech_stack button:focus,
+.tech_stack button:hover,
+.tech_stack button{
+    height: 30px;
+    width: 100px;
+    font-size:12px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #2D3449 !important;
+    border: 1px solid #efefef33;
+}
+
+.git_progress{
+    border: 1px solid #efefef33;
+    border-radius: 10px;
+    background-color: #2D3449;
+}
+
+.git_progress p{
+    font-size: 13px !important;
+    margin-bottom: .5rem !important;
+}
+
+.progress_dot{
+    height: 12px;
+    width:12px;
+    border-radius: 3px;
+    background-color: #4EDEA3;
+}
+
+.progress_dot:nth-child(2){
+    background-color: #47BC90;
+}
+.progress_dot:nth-child(3){
+    background-color: #41997F;
+}
+.progress_dot:nth-child(4){
+    background-color: #3A786C;
+}
+.progress_dot:nth-child(5){
+    background-color: #34555B;
+}
+.progress_dot:nth-child(6){
+    background-color: #304552;
+}
+
+.progress_container{
+    height: 50px;
+    width: 100%;
+    background-color: #2D3449;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #efefef33;
+}
+
+.progress_bar{
+    height:50px;
+    width: 80%;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #33546B;
+}
+
+.progress_bar p{
+    font-size: 13px !important;
+}
