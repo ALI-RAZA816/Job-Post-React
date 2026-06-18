@@ -1,0 +1,57 @@
+.nav li a{
+    color:#2D3449;
+}
+
+.title:hover,
+.title{
+    color:#BAC1FF;
+}
+
+.links:hover{
+    color:#BAC1FF !important;
+}
+
+.links{
+    color: #efefef;
+    font-size: 1rem;
+}
+
+.links:focus,
+.links:hover{
+    color: #efefef;
+}
+
+.search{
+    height: 45px;
+    border:1px solid #5e5e5e;
+    background-color: #2D3449;
+}
+
+.search_box::placeholder{
+    color: #efefef;
+}
+
+.search_box{
+    outline: none;
+    color:#efefef;
+    font-size: 1rem;
+}
+
+.bell:hover,
+.darkmode:hover{
+    color: #BAC1FF;
+}
+.bell,
+.darkmode{
+    color:#efefef;
+    cursor: pointer;
+}
+
+.post_job:focus,
+.post_job:hover,
+.post_job{
+    color:#3a35c9;
+    font-weight: bold;
+    border-color:#BAC1FF;
+    background-color: #BAC1FF !important;
+}
