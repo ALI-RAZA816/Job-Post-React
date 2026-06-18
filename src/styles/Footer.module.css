@@ -1,0 +1,31 @@
+.footer{
+    border-top: 1px solid #747474;
+    background-color: #060E20;
+}
+
+.first_box h2{
+    color: #BAC1FF;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.first_box p{
+    font-size: 15px;
+    color: #bac1ff98;
+}
+
+.second_box > span,
+.third_box > span,
+.fourth_box > span{
+    color: #BAC1FF;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.fourth_box > ul li,
+.second_box > ul li,
+.third_box > ul li{
+    color: #A5A5B7;
+    font-size: 14px;
+    margin-bottom: .5rem;
+}
