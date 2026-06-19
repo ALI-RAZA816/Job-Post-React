@@ -1,0 +1,125 @@
+.filter_container{
+    background-color: #171F33;
+    border: 1px solid #2D3449;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.filter_container h3{
+    color: #DAE2FD;
+}
+
+.location span,
+.jobType span,
+.skills span{
+    color: #8990A8;
+    font-size: 13px;
+}
+
+.typename,
+.filterName{
+    color: #DAE2FD;
+    font-size: 14px;
+}
+
+.locationName{
+    font-size: 14px;
+    background-color:#2D3449;
+}
+
+.sorting h2{
+    color: #DAE2FD;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
+.sorting p{
+    color: #A3ABC4;
+}
+
+.img{
+    height: 60px;
+    max-width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0F172A;
+    border-radius: 10px;
+    border: 1px solid #2D3449;
+    /* border: 1px solid #2D3449; */
+}
+
+.img img{
+    height: 45px;
+    width: 45px;
+    object-fit: contain;
+}
+
+.jobs_card{
+    /* display: flex; */
+    padding: 1.5rem;
+    column-gap: 2rem;
+    border: 1px solid #2D3449;
+    background-color: #171F33;
+    border-radius: 10px;
+}
+
+
+.job_details h3{
+    color: #DAE2FD;
+    font-weight: bold;
+}
+
+.job_details ul li:first-child{
+    color: #DAE2FD;
+}
+
+.job_details ul li:last-child{
+    color: #8990A8;
+}
+
+.job_details ul{
+    display: inline-flex;
+    column-gap: 2rem;
+    font-size: 14px;
+    padding-left: 1rem;
+}
+
+.tech_stacks{
+    display: flex;
+    column-gap: .8rem;
+}
+
+.tech_stacks button{
+    height: 35px;
+    width: min-content;
+    color:#efefef;
+    border-radius: 3px;
+    font-size: 13px;
+    padding: 0 .5rem;
+    background-color: #2D3449;
+    border: 1px solid #434c68;
+}
+
+.price{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price span{
+    color: #DAE2FD;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.price button:hover,
+.price button:focus,
+.price button{
+    height: 40px;
+    width: 120px;
+    color: #100691;
+    font-weight: bold;
+    background-color: #DAE2FD;
+}

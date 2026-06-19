@@ -23,6 +23,8 @@
 
 .search{
     height: 45px;
+    width: 100%;
+    max-width:250px;
     border:1px solid #5e5e5e;
     background-color: #2D3449;
 }
@@ -32,6 +34,7 @@
 }
 
 .search_box{
+    width: 100%;
     outline: none;
     color:#efefef;
     font-size: 1rem;
@@ -43,6 +46,7 @@
 }
 .bell,
 .darkmode{
+    font-size: 1.5rem;
     color:#efefef;
     cursor: pointer;
 }
@@ -54,4 +58,40 @@
     font-weight: bold;
     border-color:#BAC1FF;
     background-color: #BAC1FF !important;
+}
+
+.barsIcon,
+.xmark{
+    display: none !important;
+    cursor: pointer;
+}
+
+.xmark{
+    position: absolute;
+    right:-2rem;
+}
+
+@media screen and (max-width:992px) {
+    
+    .navbar ul{
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 300px;
+        transition: left .20s ease-in-out;
+        display: block;
+        background-color: #2D3449 !important;
+    }
+   
+    .show{
+        left:0 !important;
+    }
+
+    .barsIcon,
+    .xmark{
+        display: block !important;
+    }
+
+   
 }

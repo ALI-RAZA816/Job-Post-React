@@ -11,4 +11,6 @@ body{
     font-family: "Inter", sans-serif;
     /* font-family: "Geist", sans-serif; */
     background-color: #0D1629;
+    position: relative;
 }
+

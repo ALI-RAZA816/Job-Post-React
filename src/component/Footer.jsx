@@ -10,8 +10,8 @@ export default function Footer() {
                     <h2>DevConnect</h2>
                     <p>© 2024 DevConnect. Built for developers by <br /> developers.</p>
                 </div>
-                <div className={`col-2 ${style.second_box}`}>
-                    <span class='mb-3 d-inline-block'>Platform</span>
+                <div className={`col-sm-6 col-md-2 ${style.second_box}`}>
+                    <span className='mb-3 d-inline-block'>Platform</span>
                     <ul className='nav flex-column'>
                         <li>About</li>
                         <li>Privacy</li>
@@ -19,8 +19,8 @@ export default function Footer() {
                         <li>Support</li>
                     </ul>
                 </div>
-                <div className={`col-2 ${style.third_box}`}>
-                    <span class='mb-3 d-inline-block'>Community</span>
+                <div className={`col-sm-6 col-md-2 ${style.third_box}`}>
+                    <span className='mb-3 d-inline-block'>Community</span>
                     <ul className='nav flex-column'>
                         <li>Discussions</li>
                         <li>Open Source</li>
@@ -28,7 +28,7 @@ export default function Footer() {
                     </ul>
                 </div>
                 <div className={`col-2 ${style.fourth_box}`}>
-                    <span class='mb-3 d-inline-block'>Social</span>
+                    <span className='mb-3 d-inline-block'>Social</span>
                     <ul className='nav flex-column'>
                         <li>Twitter/X</li>
                         <li>Linkedin</li>
