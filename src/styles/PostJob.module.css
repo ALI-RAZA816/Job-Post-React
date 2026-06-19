@@ -1,0 +1,116 @@
+.jobpost_hd h2{
+    font-weight: bold;
+    color: #C0C1FF;
+}
+
+.jobpost_hd p{
+    font-size: 16px;
+    color: #BEC6E0;
+}
+
+.job_preview,
+.salary,
+.job_description,
+.job_basics{
+    border: 1px solid #283044;
+    background-color: #131B2E;
+}
+
+.job_preview h2,
+.salary h2,
+.job_description h2,
+.job_basics h2{
+    color: #C0C1FF;
+    font-size: 1.5rem;
+    display: flex;
+    font-weight: bold;
+}
+
+.salary label,
+.job_description label,
+.job_basics label{
+    color: #BEC6E0;
+    font-size: 13px;
+}
+
+.job_description input::placeholder,
+.job_description textarea::placeholder,
+.job_basics input::placeholder,
+.job_basics select::placeholder{
+    color: #6F778E;
+}
+
+.salary input,
+.job_description input,
+.job_description textarea,
+.job_basics input,
+.job_basics select{
+    height: 50px;
+    border-color:#7b7f8b ;
+    color: #efefef !important;
+    background-color: #2D3449 !important;
+}
+
+.job_description textarea{
+    height: 350px !important;
+}
+
+.job_preview span{
+    color: #10A174;
+    font-size: 11px;
+    font-weight: bold;
+    background-color:#162E3A;
+}
+
+.preview_detail{
+    border: 1px solid #283044;
+    background-color: #0F172A;
+}
+
+.preview_detail h2{
+    font-size: 1.1rem !important;
+}
+
+.preview_detail  span{
+    background-color: transparent !important;
+    color: #BEC6E0 !important;
+    padding: 0 !important;
+    font-size: 15px;
+}
+
+.corporate{
+    height: 45px;
+    width: 45px;
+    background-color: #262E53;
+}
+
+.corporate_icon{
+    font-size: 1.5rem;
+    color: #C0C1FF;
+}
+
+.publishJob button{
+    height: 50px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color:#9293e7;
+    color: rgb(15, 15, 122);
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.publishJob button:last-of-type{
+    border: 1px solid #7b7f8b;
+    background-color: transparent !important;
+    color: #aaacb1 !important;
+}
+
+.publishJob button:last-of-type:hover{
+    background-color: #2D3449 !important;
+}
+
+.publishJob span{
+    background:  transparent !important;
+    color: #2D3449;
+}

@@ -40,6 +40,7 @@
 .img{
     height: 60px;
     max-width: 60px;
+    min-width: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,6 +63,13 @@
     border: 1px solid #2D3449;
     background-color: #171F33;
     border-radius: 10px;
+    transition: .20s ease;
+    cursor: pointer;
+}
+
+.jobs_card:hover{
+    transform: scale(1.01);
+    border-color: #BAC1FF;
 }
 
 

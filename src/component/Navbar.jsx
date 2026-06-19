@@ -34,7 +34,7 @@ export default function Navbar() {
                     </div>
                     <FaRegBell className={`${style.bell} mx-4`}/>
                     <MdOutlineDarkMode className={`${style.darkmode}  me-3`} />
-                    <button className={`btn text-nowrap  ${style.post_job}`}>Post Job</button>
+                    <Link to='/postjob'> <button className={`btn text-nowrap  ${style.post_job}`}>Post Job</button></Link>
                 </div>
             </div>
         </nav>

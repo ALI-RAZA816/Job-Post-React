@@ -7,6 +7,7 @@ import Footer from "./component/Footer";
 import ContextProvider from "./context/AppContext";
 import Jobs from "./pages/Jobs";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PostJob from "./pages/PostJob";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/jobs' element={<Jobs/>}/>
+            <Route path='/postjob' element={<PostJob/>}/>
           </Routes>
         </main>
         <Footer/>
