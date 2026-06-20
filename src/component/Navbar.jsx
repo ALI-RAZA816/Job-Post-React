@@ -25,7 +25,7 @@ export default function Navbar() {
                         <HiXMark onClick={hideSidebar} className={`${style.xmark} text-white fs-2`} />
                         <li className="nav-item"><Link className={`nav-link ${style.links}`} to="/jobs">Jobs</Link></li>
                         <li className="nav-item"><Link className={`nav-link ${style.links}`} to="dashboard">Dashboard</Link></li>
-                        <li className="nav-item"><Link className={`nav-link ${style.links}`} to='/developers'>Developers</Link></li>
+                        <li className="nav-item"><Link className={`nav-link ${style.links}`} to=''>Developers</Link></li>
                     </ul>
                 </div>
                 <div className='d-flex align-items-center'>

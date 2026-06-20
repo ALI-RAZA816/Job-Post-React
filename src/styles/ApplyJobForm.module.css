@@ -1,0 +1,121 @@
+.img{
+    height: 60px;
+    max-width: 60px;
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0F172A;
+    border-radius: 10px;
+    border: 1px solid #2D3449;
+    /* border: 1px solid #2D3449; */
+}
+
+.img img{
+    height: 45px;
+    width: 45px;
+    object-fit: contain;
+}
+
+.jobdetail > div h2{
+    color: #DAE2EF;   
+}
+
+.jobdetail > div p{
+    color: #C0C1FF;
+}
+
+.jobtype span{
+    color: #C7C4D7;
+    font-size: 14px;
+    border:1px solid #334155;
+    background-color:#222A3D;
+}
+
+.content h3{
+    color: #DAE2FD;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
+.content li,
+.content p{
+    color: #C7C4D7;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.company{
+    border: 1px solid #2D3449;
+    background-color:#131B2E;
+}
+
+.information h3{
+    color: #C0C1FF;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.information span{
+    color: #C7C4D7;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: .8rem;
+    display: inline-flex;
+}
+
+.information label{
+    font-size: 14px;
+    color: #DAE2EF;
+}
+
+.field{
+    border: 1px solid #2D3449;
+    background-color: #0F172A;
+}
+
+.field input{
+    border: none;
+    outline: none;
+}
+
+.coverLetter label{
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.coverLetter textarea:focus,
+.coverLetter textarea{
+    height: 150px;
+    color: #efefef;
+    background-color: #0F172A;
+}
+
+.coverLetter textarea::placeholder{
+    color: #C7C4D7;
+}
+
+.information{
+    border: 1px solid #2D3449;
+    background-color:#182234 ;
+}
+
+.information button:hover,
+.information button{
+    width: 100%;
+    color: #0F172A;
+    font-weight: bold;
+    background-color: #C0C1FF;
+}
+
+.information button:last-of-type{
+    background-color: transparent;
+    color: #4EDEA3;
+    border-color: #4EDEA3;
+}
+
+.information button:last-of-type:hover{
+    background-color: rgba(78, 222, 163,.20);
+}

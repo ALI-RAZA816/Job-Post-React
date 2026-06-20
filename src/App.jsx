@@ -9,6 +9,7 @@ import Jobs from "./pages/Jobs";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PostJob from "./pages/PostJob";
 import Dashboard from "./pages/Dashboard";
+import ApplyJobForm from "./pages/ApplyJobForm";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/jobs' element={<Jobs/>}/>
             <Route path='/postjob' element={<PostJob/>}/>
             <Route path='/dashboard' element={<Dashboard/>}/>
+            <Route path='/applyjob' element={<ApplyJobForm/>}/>
           </Routes>
         </main>
         <Footer/>

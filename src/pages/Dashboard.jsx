@@ -9,6 +9,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import { MdOutlinePersonSearch } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 export default function Dashboard() {
@@ -39,7 +40,7 @@ export default function Dashboard() {
                 <div className={`col-md-6 mt-4 mt-lg-0 col-lg-4`}>
                     <div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
                         <AiOutlineThunderbolt style={{color:'#4BD89F'}} className='fs-2 mb-3' />
-                        <span>New Matche</span>
+                        <span>Drafts</span>
                         <h2 className='mt-1'>12</h2>
                     </div>
                 </div>
@@ -59,7 +60,7 @@ export default function Dashboard() {
                                     <button>Infrastructure</button>
                                     <button>Remote</button>
                                 </div>
-                                <span><MdOutlineCalendarToday className='fs-6 me-2' />2026/05/02</span>
+                                <span><MdOutlineCalendarToday className='fs-6 me-2' />Posted 2026/05/02</span>
                             </div>
                             <div className='d-flex justify-content-start align-items-center'>
                                 <div className={`${style.edit} me-3 rounded-3`}><MdOutlineModeEdit /></div>
@@ -72,7 +73,7 @@ export default function Dashboard() {
                 <div className="col-lg-4">
                     <div className={`${style.quick_Actions} p-4 rounded-3 mt-4`}>
                         <span className='mb-4 d-inline-flex'>Quick Actions</span>
-                        <button className='d-flex justify-content-center align-items-center'><FaPlus className='me-2' />Post New Job</button>
+                        <button className='d-flex justify-content-center align-items-center'><Link to='/postjob' className='text-decoration-none' style={{color: '#1d21e0'}}><FaPlus className='me-2' />Post New Job</Link></button>
                         <button className='d-flex justify-content-center align-items-center mt-3'><MdOutlinePersonSearch className='me-2 fs-5'/>Search Developers</button>
                     </div>
                 </div>

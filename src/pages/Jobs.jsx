@@ -4,6 +4,7 @@ import { IoFilterSharp } from "react-icons/io5";
 import image from '../assets/asrew7982304021341asdfjlSLDJKFOWERLKJA32423asfasdf.PNG'
 import { CiLocationOn } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 
 export default function Jobs() {
 
@@ -83,7 +84,7 @@ export default function Jobs() {
                                         <span>$140k - $200k</span>
                                         <div className='d-flex align-items-center'>
                                             <div className={`${style.bookmark} rounded-2 d-flex justify-content-center align-items-center me-3 text-white`}><CiBookmark /></div>
-                                            <button className='btn'>Apply Now</button>
+                                            <Link to="/applyjob"><button className='btn'>Apply Now</button></Link>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +111,7 @@ export default function Jobs() {
                                         <span>$140k - $200k</span>
                                         <div className='d-flex align-items-center'>
                                             <div className={`${style.bookmark} rounded-2 d-flex justify-content-center align-items-center me-3 text-white`}><CiBookmark /></div>
-                                            <button className='btn'>Apply Now</button>
+                                            <Link to="/applyjob"><button className='btn'>Apply Now</button></Link>
                                         </div>
                                     </div>
                                 </div>
