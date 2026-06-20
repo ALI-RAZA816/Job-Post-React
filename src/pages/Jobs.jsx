@@ -82,7 +82,7 @@ export default function Jobs() {
                                     <div className={`${style.price} mt-4`}>
                                         <span>$140k - $200k</span>
                                         <div className='d-flex align-items-center'>
-                                            <div className="save"><CiBookmark /></div>
+                                            <div className={`${style.bookmark} rounded-2 d-flex justify-content-center align-items-center me-3 text-white`}><CiBookmark /></div>
                                             <button className='btn'>Apply Now</button>
                                         </div>
                                     </div>
@@ -109,7 +109,7 @@ export default function Jobs() {
                                     <div className={`${style.price} mt-4`}>
                                         <span>$140k - $200k</span>
                                         <div className='d-flex align-items-center'>
-                                            <div className="save"><CiBookmark /></div>
+                                            <div className={`${style.bookmark} rounded-2 d-flex justify-content-center align-items-center me-3 text-white`}><CiBookmark /></div>
                                             <button className='btn'>Apply Now</button>
                                         </div>
                                     </div>

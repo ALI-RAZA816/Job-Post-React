@@ -1,0 +1,146 @@
+.dashboard_title h1{
+    color: #DAE2FD;
+    font-size: 2rem;
+    font-weight: 650;
+    /* margin-bottom: 0 !important; */
+}
+
+.dashboard_title p{
+    color: #A3ABC4;
+    font-size: 17px;
+}
+
+.quick_Actions,
+.jobcards,
+.cards{
+    border: 1px solid #283044;
+    background-color: #1C2638;
+    cursor: pointer;
+    transition: transform .10s ease-in;
+}
+
+.jobcards:hover,
+.cards:hover{
+    border-color: #DAE2FD;
+    transform:translateY(-3px);
+}
+
+.cards span{
+    color: #A3ABC4;
+    font-size: 1rem;
+    font-weight: 650;
+    text-transform: uppercase;
+}
+
+.cards h2{
+    color: #DAE2FD;
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.jobs h1{
+    color: #DAE2FD;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.jobs span{
+    color: #8083FF;
+    font-weight: bold;
+}
+
+.jobcards h2{
+    color: #D9E1FC;
+    font-size: 1.3rem;
+}
+
+.stacks{
+    display: flex;
+    column-gap: .5rem;
+}
+
+.stacks button{
+    height: 25px;
+    outline: none;
+    border: none;
+    color: #A3ABC4;
+    font-size: 14px;
+    border-radius: 3px;
+    padding: 0 .5rem;
+    width: max-content;
+    background-color: #2D3449;
+}
+
+.jobcards span{
+    color: #A3ABC4;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.edit,
+.delete{
+    color: #A3ABC4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 45px;
+    transition: .20s ease;
+    border: 1px solid #283044;
+}
+
+.edit:hover{
+    color:#8083FF;
+    border-color: #8083FF;
+}
+
+.delete:hover{
+    color: rgba(255, 0, 0, 0.521);
+    border-color: rgba(255, 0, 0, 0.473);
+}
+
+.jobcards .viewApplication{
+    height: 45px;
+    width: 150px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #A3ABC4;
+    background-color: #2D3449;
+}
+
+.jobcards .viewApplication:hover{
+    background-color: #8083FF;
+    color: #3235ec;
+}
+
+.quick_Actions span{
+    color: #D9E1FC;
+    font-size: 17px;
+}
+
+.quick_Actions button{
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.quick_Actions button:first-of-type{
+    color: #1d21e0;
+    font-weight: bold;
+    background-color: #989af5 !important;
+}
+
+.quick_Actions button:last-of-type{
+    border: 1px solid #4EDEA3;
+    color: #4EDEA3;
+}
+
