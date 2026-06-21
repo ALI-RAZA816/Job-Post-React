@@ -65,7 +65,7 @@ export default function Dashboard() {
                             <div className='d-flex justify-content-start align-items-center'>
                                 <div className={`${style.edit} me-3 rounded-3`}><MdOutlineModeEdit /></div>
                                 <div className={`${style.delete} me-3 rounded-3`}><RiDeleteBinLine /></div>
-                                <button className={`${style.viewApplication}`}>View Application</button>
+                                <Link to="/view"><button className={`${style.viewApplication}`}>View Application</button></Link>
                             </div>
                         </div>
                     </div>

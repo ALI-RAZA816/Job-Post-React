@@ -65,9 +65,42 @@ export default function ApplyJobForm() {
                                 <label htmlFor="" className='form-label mb-1'>Full Name</label>
                                 <input type="text" className='bg-transparent border-0 text-white' />
                             </div>
-                            <div className={`form-control d-flex flex-column ${style.field}`}>
+                            <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
                                 <label htmlFor="" className='form-label mb-1'>Email Address</label>
                                 <input type="text" className='bg-transparent border-0 text-white' />
+                            </div>
+                            <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
+                                <label htmlFor="" className='form-label mb-1'>Address</label>
+                                <input type="text" className='bg-transparent border-0 text-white' />
+                            </div>
+                            <div>
+                                <span>Social Links</span>
+                                <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
+                                    <label htmlFor="" className='form-label mb-1'>GitHub Profile</label>
+                                    <input type="text" className='bg-transparent border-0 text-white' />
+                                </div>
+                                <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
+                                    <label htmlFor="" className='form-label mb-1'>Linkedin Profile</label>
+                                    <input type="text" className='bg-transparent border-0 text-white' />
+                                </div>
+                                <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
+                                    <label htmlFor="" className='form-label mb-1'>Portfolio Website</label>
+                                    <input type="text" className='bg-transparent border-0 text-white' />
+                                </div>
+                            </div>
+                            <div>
+                                <span>Additional</span>
+                                <div>
+                                <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
+                                    <label htmlFor="" className='form-label mb-1'>Expected Salary (Min USD)</label>
+                                    <input type="number" className='bg-transparent border-0 text-white' />
+                                </div>
+                                <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
+                                    <label htmlFor="" className='form-label mb-1'>Expected Salary (Max USD)</label>
+                                    <input type="number" className='bg-transparent border-0 text-white' />
+                                </div>
+
+                                </div>
                             </div>
                         </div>
                         <div className={`${style.coverLetter} mt-3`}>
@@ -76,6 +109,7 @@ export default function ApplyJobForm() {
                         </div>
                         <button className='d-flex align-items-center mt-3 py-2 justify-content-center btn'>Submit Application<VscSend className='ms-2' /></button>
                         <button className='d-flex align-items-center mt-2 py-2 justify-content-center btn'>Save for later</button>
+                        <span className='d-inline-flex text-center text-capitalize mt-3' style={{fontSize:'15px'}}>By applying, you agree to our Terms of Service and Privacy Policy.</span>
                     </form>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 }
 
 .title:hover,
+.title:focus,
 .title{
     color:#BAC1FF;
 }

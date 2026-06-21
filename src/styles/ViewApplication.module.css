@@ -1,0 +1,113 @@
+.applicationHd{
+    color: #DAE2FD;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.social_links,
+.coverletter,
+.profile{
+    border: 1px solid #334155;
+    background-color: #182234;
+}
+
+.icon{
+    cursor: pointer;
+    color: #DAE2FD;
+    border: 1px solid #334155;
+    background-color: #1E293B;
+}
+
+.icon:hover{
+    border-color: #DAE2FD;
+}
+
+.profile h3{
+    font-weight: bold;
+    margin-bottom: 0;
+    color: #DAE2FD;
+}
+
+.image{
+    height: 80px;
+    width: 80px;
+    
+}
+
+.image img{
+    object-fit: cover;
+}
+
+.additional div span:first-child,
+.letter p,
+.social_links span,
+.social_links div,
+.coverletter > div span,
+.profile p{
+    color: #C7C4D7;
+    margin-bottom: 0;
+}
+
+
+
+.coverletter > div span:last-child{
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+.social_links div{
+    position: relative;
+    border: 1px solid #334155;
+    background-color: #0F172A;
+}
+
+.social_links div:hover .shareLink,
+.social_links div:hover{
+    cursor: pointer;
+    opacity: 1;
+    border-color: #C7C4D7;
+}
+
+.shareLink{
+    top: 50%;
+    opacity: 0;
+    right: 0;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 1.2rem;
+    transform: .20s ease;
+}
+
+.additional div span:last-child{
+    color: #D3E2FD;
+    font-size: 14px;
+}
+
+.additional div span:first-child{
+    color: #C7C4D7;
+    margin-bottom: 0;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.btn button:hover,
+.btn button:focus,
+.btn button{
+    color: #efefef;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #8E9AFF;
+}
+
+.btn button:last-child{
+    border: 1px solid #334155;
+    background-color: transparent !important;
+}
+
+.btn button:last-child:hover{
+    background-color:#33415594 !important;
+}
+
+
+
+
