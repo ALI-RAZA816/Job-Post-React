@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import style from '../styles/Dashboard.module.css';
 import { MdWorkOutline } from "react-icons/md";
 import { MdOutlineGroup } from "react-icons/md";
@@ -10,10 +10,15 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+import NoPost from '../component/NoPost';
 
 
 export default function Dashboard() {
-  return (
+    
+    const {posts,deletepost,editposthandler} = useContext(AppContext);
+  
+    return (
     <section>
         <div className="container">
             <div className="row py-4">
@@ -27,7 +32,7 @@ export default function Dashboard() {
                     <div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
                         <MdWorkOutline style={{color:'#DAE2FD'}} className='fs-2 mb-3' />
                         <span>Active Jobs</span>
-                        <h2 className='mt-1'>456</h2>
+                        <h2 className='mt-1'>{posts.length <= 9 ? `0${posts.length}` : posts.length}</h2>
                     </div>
                 </div>
                 <div className={`col-md-6 mt-4 mt-md-0 col-lg-4`}>
@@ -52,7 +57,26 @@ export default function Dashboard() {
                         <span>View Archieve <FaArrowRight /></span>
                     </div>
                     <div className="postedJobs">
-                        <div className={`${style.jobcards} mb-3 p-4 d-md-flex justify-content-between rounded-3`}>
+                        {/* job post cards */}
+                        {posts.length === 0 ?<NoPost/> : posts.map((item, index)=>{
+                            return <div key={index} className={`${style.jobcards} mb-3 p-4 d-md-flex justify-content-between rounded-3`}>
+                                        <div>
+                                            <h2 className="title">{item.title}</h2>
+                                            <div className={`${style.stacks}`}>
+                                                {item.requiredskill.map(skill=>{
+                                                    return <button key={skill}>{skill}</button>
+                                                })}
+                                            </div>
+                                            <span><MdOutlineCalendarToday className='fs-6 me-2' />{item.postDate}</span>
+                                        </div>
+                                        <div className='d-flex justify-content-start align-items-center'>
+                                            <Link to='/edit'><div onClick={()=>editposthandler(index)} className={`${style.edit} editbutton me-3 rounded-3`}><MdOutlineModeEdit /></div></Link>
+                                            <div onClick={()=>deletepost(index)} className={`${style.delete} me-3 rounded-3`}><RiDeleteBinLine /></div>
+                                            <Link to="/view"><button className={`${style.viewApplication}`}>View Application</button></Link>
+                                        </div>
+                                    </div>
+                        })}
+                        {/* <div className={`${style.jobcards} mb-3 p-4 d-md-flex justify-content-between rounded-3`}>
                             <div>
                                 <h2 className="title">Senior Rust Engineer</h2>
                                 <div className={`${style.stacks}`}>
@@ -67,7 +91,7 @@ export default function Dashboard() {
                                 <div className={`${style.delete} me-3 rounded-3`}><RiDeleteBinLine /></div>
                                 <Link to="/view"><button className={`${style.viewApplication}`}>View Application</button></Link>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="col-lg-4">

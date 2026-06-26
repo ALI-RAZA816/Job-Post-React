@@ -33,6 +33,19 @@
     font-size: 13px;
 }
 
+.job_description span{
+    display: inline-flex;
+    /* border: 1px solid red; */
+    height: 40px;
+    border-radius: 100px;
+    width: max-content;
+    text-align: center;
+    /* line-height: 40px; */
+    align-items: center;
+    padding:0 1rem;
+    background-color: #10A174;
+}
+
 .job_description input::placeholder,
 .job_description textarea::placeholder,
 .job_basics input::placeholder,

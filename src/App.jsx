@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import ApplyJobForm from "./pages/ApplyJobForm";
 import SavedJob from "./pages/SavedJob";
 import ViewApplication from "./pages/ViewApplication";
+import EditPost from "./pages/EditPost";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path='/applyjob' element={<ApplyJobForm/>}/>
             <Route path='/savejob' element={<SavedJob/>}/>
             <Route path='/view' element={<ViewApplication/>}/>
+            <Route path='/edit' element={<EditPost/>}/>
           </Routes>
         </main>
         <Footer/>

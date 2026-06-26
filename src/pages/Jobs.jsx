@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import style from '../styles/Jobs.module.css'
 import { IoFilterSharp } from "react-icons/io5";
 import image from '../assets/asrew7982304021341asdfjlSLDJKFOWERLKJA32423asfasdf.PNG'
 import { CiLocationOn } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 import { Link } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+import NoPost from '../component/NoPost';
 
 export default function Jobs() {
 
     const filters = ["React / Next.js", "Rust", "TypeScript", "Python/FastApi", "PostgreSQL"];
     const jobType = ["Part Time", "Contract", "Freelance"];
-  
+    
+    const {posts} = useContext(AppContext);
+
     return (
     <section>
         <div className="container">
@@ -23,9 +27,9 @@ export default function Jobs() {
                                 <span className='text-uppercase fw-bold mb-2 d-inline-block'>Skills</span>
                                 <div>
                                     {filters.map(item=>{
-                                        return   <div key={item} class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value={item} id={item}/>
-                                                    <label class={`form-check-label ms-1 ${style.filterName}`} for={item}>
+                                        return   <div key={item} className="form-check">
+                                                    <input className="form-check-input" type="checkbox" value={item} id={item}/>
+                                                    <label className={`form-check-label ms-1 ${style.filterName}`} htmlFor={item}>
                                                         {item}
                                                     </label>
                                                 </div> 
@@ -45,9 +49,9 @@ export default function Jobs() {
                                 <span className='text-uppercase fw-bold mb-2 d-inline-block'>Job Type</span>
                                 <div className="jobtype">
                                     {jobType.map(item=>{
-                                        return <div key={item} class="form-check">
-                                                    <input class="form-check-input" type="radio" name='jobtype' value={item} id={item}/>
-                                                    <label class={`form-check-label ms-1 ${style.typename}`} for={item}>
+                                        return <div key={item} className="form-check">
+                                                    <input className="form-check-input" type="radio" name='jobtype' value={item} id={item}/>
+                                                    <label className={`form-check-label ms-1 ${style.typename}`} htmlFor={item}>
                                                         {item}
                                                     </label>
                                                 </div> 
@@ -63,34 +67,38 @@ export default function Jobs() {
                             <h2 className='mt-3'>Available Jobs</h2>
                             <p>Showing 42 matching technical positions</p>
                         </div>
-                        <div className='jobs mb-3'>
-                            <div className={`${style.jobs_card} d-md-flex `}>
-                                <div className={`${style.img} mb-3 mb-md-0`}>
-                                    <img src={image} alt="" />
-                                </div>
-                                <div className={`${style.job_details} w-100`}>
-                                    <h3 className='mb-3'>Senior Frontend Engineer</h3>
-                                    <ul>
-                                        <li>Linear</li>
-                                        <li><CiLocationOn className='fs-6 me-2' />San Francisco (Remote)</li>
-                                    </ul>
-                                    <div className={`${style.tech_stacks} mt-2`}>
-                                        <button>React</button>
-                                        <button>Next.js</button>
-                                        <button>TypeScript</button>
-                                        <button>Tailwand</button>
-                                    </div>
-                                    <div className={`${style.price} mt-4`}>
-                                        <span>$140k - $200k</span>
-                                        <div className='d-flex align-items-center'>
-                                            <div className={`${style.bookmark} rounded-2 d-flex justify-content-center align-items-center me-3 text-white`}><CiBookmark /></div>
-                                            <Link to="/applyjob"><button className='btn'>Apply Now</button></Link>
+                        {/* jobcards  */}
+                        {posts.length === 0 ?<NoPost/> : posts.map((item, index)=>{
+                            return <div key={index} className='jobs mb-3'>
+                                        <div className={`${style.jobs_card} d-md-flex `}>
+                                            <div className={`${style.img} mb-3 mb-md-0`}>
+                                                <img src={image} alt="" />
+                                            </div>
+                                            <div className={`${style.job_details} w-100`}>
+                                                <h3 className='mb-3'>{item.title}</h3>
+                                                <ul>
+                                                    <li>{item.company}</li>
+                                                    <li><CiLocationOn className='fs-6 me-2' />{item.location} ( {item.jobType} )</li>
+                                                </ul>
+                                                <div className={`${style.tech_stacks} mt-2`}>
+                                                    {item.requiredskill.map((items,i)=>{
+                                                        return <button key={i} className='text-uppercase'>{items}</button>
+                                                    })}
+                                                    
+                                                </div>
+                                                <div className={`${style.price} mt-4`}>
+                                                    <span>${item.minsalar}k - ${item.maxsalary}k</span>
+                                                    <div className='d-flex align-items-center'>
+                                                        <div className={`${style.bookmark} rounded-2 d-flex justify-content-center align-items-center me-3 text-white`}><CiBookmark /></div>
+                                                        <Link to="/applyjob"><button className='btn'>Apply Now</button></Link>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='jobs'>
+                        })}
+                        
+                        {/* <div className='jobs'>
                             <div className={`${style.jobs_card} d-md-flex`}>
                                 <div className={`${style.img} mb-3 mb-md-0`}>
                                     <img src={image} alt="" />
@@ -116,7 +124,7 @@ export default function Jobs() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
