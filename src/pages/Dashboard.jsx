@@ -62,9 +62,9 @@ export default function Dashboard() {
                             return <div key={index} className={`${style.jobcards} mb-3 p-4 d-md-flex justify-content-between rounded-3`}>
                                         <div>
                                             <h2 className="title">{item.title}</h2>
-                                            <div className={`${style.stacks}`}>
+                                            <div className={`${style.stacks} flex-wrap`}>
                                                 {item.requiredskill.map(skill=>{
-                                                    return <button key={skill}>{skill}</button>
+                                                    return <button className='my-1' key={skill}>{skill}</button>
                                                 })}
                                             </div>
                                             <span><MdOutlineCalendarToday className='fs-6 me-2' />{item.postDate}</span>

@@ -7,17 +7,32 @@ export default function ContextProvider({children}){
     // postdate
     // const navigate = useNavigate();
     const date = new Date();
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const day = date.getDate();
+
+    // error states 
+    const [titleErr, settitleErr] = useState();
+    const [companyErr, setcompanyErr] = useState();
+    const [locationErr, setlocationErr] = useState();
+    const [jobtypeErr, setjobtypeErr] = useState();
+    const [descriptionErr, setdescriptionErr] = useState();
+    const [skillsErr, setskillsErr] = useState();
+    const [minsalaryErr, setminErr] = useState();
+    const [maxsalaryErr, setmaxsalaryErr] = useState();
+    const [benefitsErr, setbenefitsErr] = useState();
   
     // posts states
     const skills = useRef();
     const [arrskills, setarrskills] = useState([]);
+    const[isPosted, setPosted] = useState(false);
     const [posts, setposts] = useState(()=>{
         const saved = localStorage.getItem('posts');
         return saved ? JSON.parse(saved) : [];
     });
+    const [savejob, setsavejob] = useState(()=>{
+        const savejob = localStorage.getItem('savejobs');
+        return savejob ? JSON.parse(savejob) : []});
     const [jobtitle, setjobtitle] = useState('');
     const [companyname, setcompanyname] = useState('');
     const [location, setlocation] = useState('');
@@ -27,10 +42,6 @@ export default function ContextProvider({children}){
     const [maxsalary, setmaxsalary] = useState('');
     const [additional, setadditional] = useState([]);
     const [itemIndex, setitemIndex] = useState();
-
-    useEffect(()=>{
-        localStorage.setItem('posts',JSON.stringify(posts));
-    },[posts]);
 
     // editposts states
     const editskills = useRef();
@@ -44,6 +55,26 @@ export default function ContextProvider({children}){
     const [editminsalary, seteditminsalary] = useState('');
     const [editmaxsalary, seteditmaxsalary] = useState('');
     const [editadditional, seteditadditional] = useState([]);
+
+    useEffect(()=>{
+        
+        localStorage.setItem('posts',JSON.stringify(posts));
+        localStorage.setItem('savejobs',JSON.stringify(savejob));
+        const interval = setTimeout(()=>{
+            settitleErr(false);
+            setcompanyErr(false);
+            setlocationErr(false);
+            setjobtypeErr(false);
+            setdescriptionErr(false);
+            setskillsErr(false);
+            setminErr(false);
+            setmaxsalaryErr(false);
+            setbenefitsErr(false);
+        },2000);
+        
+        return ()=> clearTimeout(interval);
+    },[posts, savejob]);
+
     
     
     // title handler 
@@ -55,7 +86,7 @@ export default function ContextProvider({children}){
     const minsalaryhandler = (event)=> setminsalary(event.target.value);
     const maxsalaryhandler = (event)=> setmaxsalary(event.target.value);
 
-
+    // edit post handlers
     const edittitlehandler = (event)=> seteditjobtitle(event.target.value);
     const editcompanynamehandler = (event)=> seteditcompanyname(event.target.value);
     const editlocationhandler = (event)=> seteditlocation(event.target.value);
@@ -70,8 +101,9 @@ export default function ContextProvider({children}){
             event.preventDefault();
             return;
         } 
+
         if(event.key === 'Enter'){
-            setarrskills([...arrskills, skills.current.value]);
+            setarrskills([...arrskills, skills.current.value.toLowerCase()]);
             skills.current.value = '';
         }
     }
@@ -83,7 +115,7 @@ export default function ContextProvider({children}){
             return;
         } 
         if(event.key === 'Enter'){
-            seteditarrskills([...editarrskills, editskills.current.value]);
+            seteditarrskills([...editarrskills, editskills.current.value.toLowerCase()]);
             editskills.current.value = '';
         }
     }
@@ -91,9 +123,9 @@ export default function ContextProvider({children}){
     // additonal info | First-time | Health Insurance
     const additionalhandler = (event)=>{
         if(event.target.checked){
-            setadditional([...additional, event.target.value]);
+            setadditional([...additional, event.target.value.toLowerCase()]);
         }else{
-            const removeItem = additional.filter(item=> item != event.target.value);
+            const removeItem = additional.filter(item=> item != event.target.value.toLowerCase());
             setadditional(removeItem);
         }
     }
@@ -101,9 +133,9 @@ export default function ContextProvider({children}){
     // edit additonal info | First-time | Health Insurance
     const editadditionalhandler = (event)=>{
         if(event.target.checked){
-            seteditadditional([...editadditional, event.target.value]);
+            seteditadditional([...editadditional, event.target.value.toLowerCase()]);
         }else{
-            const editremoveItem = editadditional.filter(item=> item != event.target.value);
+            const editremoveItem = editadditional.filter(item=> item != event.target.value.toLowerCase());
             seteditadditional(editremoveItem);
         }
     }
@@ -125,19 +157,60 @@ export default function ContextProvider({children}){
         setHide(true);
         document.querySelector('body').style.overflow = 'hidden';
     };
+
+    // hidemenu bar
     const hideSidebar = () => {
         setHide(false)
         document.querySelector('body').style.overflowX = 'hidden';
         document.querySelector('body').style.overflowY = 'auto';
     };
 
+
+    // post job hander
     const publishpostHandler = ()=>{
+        if(!jobtitle){
+            settitleErr(true);
+            return;
+        }
+        if(!companyname){
+            setcompanyErr(true);
+            return;
+        }
+        if(!location){
+            setlocationErr(true);
+            return;
+        }
+        if(!jobtype){
+            setjobtypeErr(true);
+            return;
+        }
+        if(!description){
+            setdescriptionErr(true);
+            return;
+        }
+        if(arrskills.length === 0){
+            setskillsErr(true);
+            return;
+        }
+        if(!minsalary){
+            setminErr(true);
+            return;
+        }
+        if(!maxsalary){
+            setmaxsalaryErr(true);
+            return;
+        }
+        if(additional.length === 0){
+            setbenefitsErr(true);
+            return;
+        }
         setposts([
             ...posts,{
+                id: Date.now(),
                 title:jobtitle,
                 company:companyname,
-                location:location,
-                jobType:jobtype,
+                location:location.toLowerCase(),
+                jobType:jobtype.toLowerCase(),
                 description:description,
                 requiredskill:arrskills,
                 minsalar:minsalary,
@@ -146,10 +219,35 @@ export default function ContextProvider({children}){
                 postDate:day+"/"+month+"/"+year
             }
         ]);
+        skills.current.value = '';
+        setjobtitle('');
+        setcompanyname('');
+        setlocation('');
+        setjobtype('');
+        setdescription('');
+        setminsalary('');
+        setmaxsalary('');
+        setTimeout(()=>{
+            setPosted(true);
+            document.querySelector('body').style.overflow = 'hidden';
+        },2000);
     }
 
+
+    // hide modalbox
+    const hidemodalbox = ()=>{
+        setPosted(false);
+        document.querySelector('body').style.overflowX = 'hidden';
+        document.querySelector('body').style.overflowY = 'auto';
+    }
+
+    // delete post handler
     const deletepost = (index)=>{
+        const deletedpost = posts[index];
         const deletedPost = posts.filter((item, i)=> i != index);
+        if (deletedpost) {
+            setsavejob(prev => prev.filter(id => id !== deletedPost.id));
+        }
         setposts(deletedPost);
     }
 
@@ -170,10 +268,12 @@ export default function ContextProvider({children}){
         seteditadditional(editItem.benefits);
     }
 
+    // edit post handler
     const editpost = ()=>{
         const updatedPost = [...posts];
         updatedPost[itemIndex] ={
             ...updatedPost[itemIndex],
+            id: Date.now(),
             title:editjobtitle,
             company:editcompanyname,
             location:editlocation,
@@ -187,7 +287,24 @@ export default function ContextProvider({children}){
         
         setposts(updatedPost);
     }
-  
+
+    // saved job handler
+    const savejobhandler = (id)=>{
+        if(savejob.includes(id)){
+            alert('already saved');
+            return;
+        }
+        setsavejob([...savejob, id]);
+    }
+
+    // unsaved job handler
+    const deletesavejobhandler = (id)=>{
+        const deleted = savejob.filter(item => item != id);
+        setsavejob(deleted);
+    }
+
+    // render savedjob 
+    const savedjobs = posts.filter(post=> savejob.includes(post.id));
 
     return (
         <AppContext.Provider value={{
@@ -206,6 +323,7 @@ export default function ContextProvider({children}){
             editposts,
             editjobtitle,
             editcompanyname,
+            savedjobs,
             editlocation,
             editjobtype,
             editdescription,
@@ -213,6 +331,17 @@ export default function ContextProvider({children}){
             editminsalary,
             editmaxsalary,
             editarrskills,
+            savejob,
+            titleErr,
+            companyErr,
+            locationErr,
+            jobtypeErr,
+            descriptionErr,
+            skillsErr,
+            isPosted,
+            minsalaryErr,
+            maxsalaryErr,
+            benefitsErr,
             editskills,
             geteditskilllhandler,
             companynamehandler,
@@ -220,7 +349,9 @@ export default function ContextProvider({children}){
             jobtypehandler,
             descriptionhandler,
             minsalaryhandler,
+            hidemodalbox,
             maxsalaryhandler,
+            deletesavejobhandler,
             editadditionalhandler,
             deletepost,
             showSidebar,
@@ -239,7 +370,8 @@ export default function ContextProvider({children}){
             editminsalaryhandler,
             editmaxsalaryhandler,
             deleteeditskillhandler,
-            editpost
+            editpost,
+            savejobhandler
         }}>
             {children}
         </AppContext.Provider>

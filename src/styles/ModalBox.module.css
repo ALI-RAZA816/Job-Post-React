@@ -1,0 +1,65 @@
+.modalcontainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(19, 27, 46,.80);
+}
+
+.zoomout{
+    transform: scale(1) !important;
+}
+
+.circlecheck{
+    font-size: 2.8rem;
+    color: #BAC1FF;
+    margin: 1.3rem 0;
+}
+
+.modalbox{
+    position: relative;
+    transform: scale(.20);
+    transition: 3s ease-in-out;
+    /* box-shadow: 0 0 10px 1px #000; */
+    background-color: #131B2E;
+}
+
+.modalbox h2{
+    color: #BAC1FF;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.modalbox p{
+    color: #C3C0D3;
+    font-size: 14px;
+}
+
+.modalbox p span{
+    color: #BAC1FF;
+}
+
+.modalbox button{
+    background: none !important;
+    border: 1px solid #BAC1FF;
+    color: #BAC1FF;
+    border-radius: 5px;
+    outline: none;
+    height: 45px;
+    padding: 0 .8rem;
+    margin: .5rem 0;
+}
+
+.modalbox button:hover{
+    background: #bac1ff3b !important;
+}
+
+.xmark{
+    position: absolute;
+    top:15px;
+    right:15px;
+    color: #BAC1FF;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

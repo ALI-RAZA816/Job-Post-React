@@ -8,6 +8,8 @@ import { CiClock2 } from "react-icons/ci";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 import { AppContext } from '../context/AppContext';
+import { createPortal } from 'react-dom';
+import ModalBox from '../component/ModalBox';
 
 
 export default function PostJob() {
@@ -32,11 +34,21 @@ export default function PostJob() {
             maxhandler, 
             additionalhandler,
             titlehandler,
+            titleErr,
+            companyErr,
+            locationErr,
+            jobtypeErr,
+            descriptionErr,
+            skillsErr,
+            minsalaryErr,
+            maxsalaryErr,
+            benefitsErr,
+            isPosted,
             jobtitle,
             getskilllhandler,
             deleteskillhandler} = useContext(AppContext);
-
   return (
+    <>
     <section>
         <div className="container">
             <div className="row py-5">
@@ -52,16 +64,17 @@ export default function PostJob() {
                                 <div className="col-md-6 mb-4">
                                     <label htmlFor="" className='form-label fw-bold text-uppercase'>Job Title</label>
                                     <input type="text" id='' className='form-control' value={jobtitle} onChange={titlehandler} name='jobtitle' placeholder='e.g. Senior Rust Engineer' />
-                                    
+                                    {titleErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
                                 </div>
                                 <div className="col-md-6 mb-4">
                                     <label htmlFor="" className='form-label fw-bold text-uppercase'>Company Name</label>
                                     <input type="text" className='form-control' name='companyname' value={companyname} onChange={companynamehandler} placeholder='e.g. Techflow System' />
-                                    
+                                    {companyErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="" className='form-label fw-bold text-uppercase'>Location</label>
                                     <input type="text" className='form-control' name='location' value={location} onChange={locationhandler} placeholder='e.g. Remote, New York etc.' />
+                                    {locationErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
                                     
                                 </div>
                                 <div className="col-md-6 mt-4 mt-md-0">
@@ -71,6 +84,7 @@ export default function PostJob() {
                                             return <option key={item} value={item}>{item}</option>
                                         })}
                                     </select>
+                                    {jobtypeErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
                                 </div>
                             </div>
                         </div>
@@ -79,6 +93,7 @@ export default function PostJob() {
                             <div className='mb-3'>
                                 <label htmlFor="" className='form-label text-uppercase'>Job Description</label>
                                 <textarea name="jobdescription" value={description} onChange={descriptionhandler}className='form-control' id="" placeholder='Describe the role, day-to-day responsibilities, and team culture'></textarea>
+                                {descriptionErr && <p className='text-danger' style={{fontSize:'14px'}}>Field is required</p>}
                                 
                             </div>
                             <div>
@@ -90,6 +105,7 @@ export default function PostJob() {
                                     <input style={{outline:'none !important',boxShadow:'none',border:'none'}} ref={skills} onKeyDown={getskilllhandler} className={`${arrskills.length === 6 ? 'd-none' : 'd-block'} w-100 border-0`} type="text" placeholder='Add skills...'/>
                                 </div>
                                 <p className='text-secondary'>Press enter to add a tag. Recommend 3-5 core skills.</p>
+                                {skillsErr && <p className='text-danger' style={{fontSize:'14px'}}>Field is required</p>}
                             </div>
                         </div>
                         <div className={`${style.salary} rounded-3 p-4 mt-5`}>
@@ -98,12 +114,13 @@ export default function PostJob() {
                                 <div className="col-md-6 mb-4">
                                     <label htmlFor="" className='form-label fw-bold text-uppercase'>Min Salary (USD)</label>
                                     <input type="number" value={minsalary} onChange={minsalaryhandler} name='minsalary' className='form-control' placeholder='1000' />
-                                    
+                                    {minsalaryErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
                                 </div>
                                 <div className="col-md-6 mb-4">
                                     <label htmlFor="" className='form-label fw-bold text-uppercase'>Max Salary (USD)</label>
                                     <input type="number" value={maxsalary} onChange={maxsalaryhandler} name='maxsalary' className='form-control' placeholder='20000' />
-                                    
+                                    {maxsalaryErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
+        
                                 </div>
                                 <div>
                                     <label htmlFor="" className='form-label mb-3 text-uppercase'>Additional Benefits</label>
@@ -118,6 +135,7 @@ export default function PostJob() {
                                                     </div>})}
                                         </div>
                                     </div>
+                                    {benefitsErr && <span className='text-danger' style={{fontSize:'14px'}}>Field is required</span>}
                                 </div>
                             </div>
                         </div>
@@ -134,14 +152,14 @@ export default function PostJob() {
                                 <div className='d-flex align-items-center'>
                                     <div className={`${style.corporate} me-3 rounded-2 d-flex justify-content-center align-items-center`}><MdCorporateFare className={style.corporate_icon} /></div>
                                     <div>
-                                        <h2 className='m-0'>Job Title Preview</h2>
-                                        <span>Company Name</span>
+                                        <h2 className='m-0 text-capitalize'>{jobtitle ? jobtitle : 'Job Title Preview'}</h2>
+                                        <span className='text-capitalize'>{companyname? companyname : 'Company Name'}</span>
                                     </div>
                                 </div>
-                                <div className='py-3 border border-secondary border-start-0 border-top-0 border-end-0'>
-                                    <span className='fw-normal d-flex align-items-center me-5'><CiLocationOn className='me-2' />Location</span>
-                                    <span className='fw-normal d-flex align-items-center' ><CiClock2 className='me-2' />Job Type</span><br />
-                                    <span className='fw-normal d-flex align-items-center'><HiOutlineCurrencyDollar className='me-2' /> $0 - $0k</span>
+                                <div className='py-3 border d-flex flex-wrap border-secondary border-start-0 border-top-0 border-end-0'>
+                                    <span className='fw-normal text-capitalize d-flex align-items-center me-5'><CiLocationOn className='me-2' />{location ? location : 'Location'}</span>
+                                    <span className='fw-normal text-capitalize d-flex align-items-center' ><CiClock2 className='me-2' />{jobtype ? jobtype : 'Part-time'}</span><br />
+                                    <span className='fw-normal text-capitalize d-flex align-items-center'><HiOutlineCurrencyDollar className='me-2' /> ${minsalary ? minsalary : '0'}k - ${maxsalary ? maxsalary : '0'}k</span>
                                 </div>
                                 <a href="" className='d-inline-block mt-2' style={{color:'#27e0a6',fontSize:'14px'}}>View Details</a>
                             </div>
@@ -156,5 +174,7 @@ export default function PostJob() {
             </div>
         </div>
     </section>
+    {isPosted && <ModalBox/>}
+    </>
   )
 }

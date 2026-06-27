@@ -13,6 +13,7 @@ import ApplyJobForm from "./pages/ApplyJobForm";
 import SavedJob from "./pages/SavedJob";
 import ViewApplication from "./pages/ViewApplication";
 import EditPost from "./pages/EditPost";
+import ModalBox from "./component/ModalBox";
 
 function App() {
   return (

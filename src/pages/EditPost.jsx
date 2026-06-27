@@ -81,11 +81,11 @@ export default function EditPost() {
                             </div>
                             <div>
                                 <label htmlFor="" className='overflow-hidden text-uppercase form-label'>Required Technologies</label>
-                                <div className='d-flex py-2 flex-md-nowrap flex-wrap align-items-center px-2 rounded-3' style={{backgroundColor:'#2D3449',border: '1px solid #283044'}}>
+                                <div className='d-flex py-2 overflow-hidden flex-wrap align-items-center px-2 rounded-3' style={{backgroundColor:'#2D3449',border: '1px solid #283044'}}>
                                     {editarrskills.map((item, index)=>{
-                                        return <span key={index} className='me-2  mt-1 mt-md-0'>{item}<RxCross2 onClick={()=> deleteeditskillhandler(index)} style={{cursor:'pointer'}} className='fs-6 ms-1' /></span>
+                                        return <span key={index} className='me-2 text-nowrap  my-1 mt-md-0'>{item}<RxCross2 onClick={()=> deleteeditskillhandler(index)} style={{cursor:'pointer'}} className='fs-6 ms-1' /></span>
                                     })}
-                                    <input style={{outline:'none !important',boxShadow:'none'}} ref={editskills} onKeyDown={geteditskilllhandler} type="text" placeholder='Add skills...' className={`${editarrskills.length === 6 ? 'd-none' : 'd-block'} border-0 form-control`} />
+                                    <input style={{outline:'none !important',boxShadow:'none'}} ref={editskills} onKeyDown={geteditskilllhandler} type="text" placeholder='Add skills...' className={`${editarrskills.length === 6 ? 'd-none' : 'd-block'} w-100 border-0 form-control`} />
                                 </div>
                                 <p className='text-secondary'>Press enter to add a tag. Recommend 3-5 core skills.</p>
                             </div>
@@ -130,14 +130,14 @@ export default function EditPost() {
                                 <div className='d-flex align-items-center'>
                                     <div className={`${style.corporate} me-3 rounded-2 d-flex justify-content-center align-items-center`}><MdCorporateFare className={style.corporate_icon} /></div>
                                     <div>
-                                        <h2 className='m-0'>Job Title Preview</h2>
-                                        <span>Company Name</span>
+                                        <h2 className='m-0 text-capitalize'>{editjobtitle ? editjobtitle : 'Job Title Preview'}</h2>
+                                        <span className='text-capitalize'>{editcompanyname ? editcompanyname : 'Company Name'}</span>
                                     </div>
                                 </div>
                                 <div className='py-3 d-flex flex-wrap align-items-center border border-secondary border-start-0 border-top-0 border-end-0'>
-                                    <span className='fw-normal me-5 d-flex align-items-center'><CiLocationOn /> Location</span>
-                                    <span className='fw-normal me-5 d-flex align-items-center' ><CiClock2 />Job Type</span><br />
-                                    <span className='fw-normal d-flex align-items-center'><HiOutlineCurrencyDollar />0k - $0k</span>
+                                    <span className='fw-normal me-5 d-flex align-items-center'><CiLocationOn className='me-1' /> {editlocation ? editlocation : 'Location'}</span>
+                                    <span className='fw-normal me-5 d-flex align-items-center' ><CiClock2 className='me-1' /> {editjobtype ? editjobtype : 'Job Type'}</span><br />
+                                    <span className='fw-normal d-flex align-items-center'><HiOutlineCurrencyDollar className='me-1' /> ${editminsalary ? editminsalary : '0'}k - ${editmaxsalary ? editmaxsalary : '0'}k</span>
                                 </div>
                                 <a href="" className='d-inline-block mt-2' style={{color:'#27e0a6',fontSize:'14px'}}>View Details</a>
                             </div>
