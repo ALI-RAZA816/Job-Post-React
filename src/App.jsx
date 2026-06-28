@@ -14,6 +14,7 @@ import SavedJob from "./pages/SavedJob";
 import ViewApplication from "./pages/ViewApplication";
 import EditPost from "./pages/EditPost";
 import ModalBox from "./component/ModalBox";
+import Draftsjob from "./pages/Draftsjob";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path='/savejob' element={<SavedJob/>}/>
             <Route path='/view' element={<ViewApplication/>}/>
             <Route path='/edit' element={<EditPost/>}/>
+            <Route path='/drafts' element={<Draftsjob/>}/>
           </Routes>
         </main>
         <Footer/>

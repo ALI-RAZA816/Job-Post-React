@@ -107,7 +107,7 @@ export default function EditPost() {
                                         <div className='row p-0 g-0'>
                                         {additionbenefits.map(item => {
                                             return  <div key={item} className="col-md-3 form-check form-check-inline">
-                                                            <input style={{height:'20px',width:'20px'}} className="form-check-input mb-2" checked={editadditional.includes(item)} onChange={editadditionalhandler} type="checkbox" value={item} id={item}/>
+                                                            <input style={{height:'20px',width:'20px'}} className="form-check-input mb-2" checked={editadditional.includes(item.toLowerCase())} onChange={editadditionalhandler} type="checkbox" value={item} id={item}/>
                                                             <label className="form-check-label ms-2" style={{fontSize:'15px'}} htmlFor={item}>
                                                                 {item}
                                                             </label>

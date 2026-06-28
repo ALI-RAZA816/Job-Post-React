@@ -12,11 +12,13 @@ import { MdOutlinePersonSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import NoPost from '../component/NoPost';
+import { FaRegSave } from "react-icons/fa";
+import Draftsjob from './Draftsjob';
 
 
 export default function Dashboard() {
     
-    const {posts,deletepost,editposthandler} = useContext(AppContext);
+    const {posts, deletepost, editposthandler, drafts} = useContext(AppContext);
   
     return (
     <section>
@@ -28,26 +30,33 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="row">
-                <div className={`col-md-6 col-lg-4`}>
-                    <div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
+                <div className={`col-md-6 col-lg-3`}>
+                    <Link to="/jobs" className='text-decoration-none'><div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
                         <MdWorkOutline style={{color:'#DAE2FD'}} className='fs-2 mb-3' />
                         <span>Active Jobs</span>
                         <h2 className='mt-1'>{posts.length <= 9 ? `0${posts.length}` : posts.length}</h2>
-                    </div>
+                    </div></Link>
                 </div>
-                <div className={`col-md-6 mt-4 mt-md-0 col-lg-4`}>
-                    <div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
+                <div className={`col-md-6 mt-4 mt-md-0 col-lg-3`}>
+                    <Link to="/applications" className='text-decoration-none'><div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
                         <MdOutlineGroup style={{color:'#4CD7F6'}} className='fs-2 mb-3' />
                         <span>Total Applicants</span>
                         <h2 className='mt-1'>12</h2>
-                    </div>
+                    </div></Link>
                 </div>
-                <div className={`col-md-6 mt-4 mt-lg-0 col-lg-4`}>
-                    <div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
+                <div className={`col-md-6 mt-4 mt-lg-0 col-lg-3`}>
+                    <Link to="/drafts" className='text-decoration-none'><div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
                         <AiOutlineThunderbolt style={{color:'#4BD89F'}} className='fs-2 mb-3' />
                         <span>Drafts</span>
-                        <h2 className='mt-1'>12</h2>
-                    </div>
+                        <h2 className='mt-1'>{drafts.length <= 9 ? `0${drafts.length}` : drafts.length}</h2>
+                    </div></Link>
+                </div>
+                <div className={`col-md-6 mt-4 mt-lg-0 col-lg-3`}>
+                    <Link to="/savejob" className='text-decoration-none'><div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
+                        <FaRegSave style={{color:'#4b60d8'}} className='fs-2 mb-3' />
+                        <span>Saved Job</span>
+                        <h2 className='mt-1'>01</h2>
+                    </div></Link>
                 </div>
             </div>
             <div className="row">

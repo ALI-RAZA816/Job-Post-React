@@ -5,7 +5,6 @@ export const AppContext = createContext();
 
 export default function ContextProvider({children}){
     // postdate
-    // const navigate = useNavigate();
     const date = new Date();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
@@ -21,11 +20,16 @@ export default function ContextProvider({children}){
     const [minsalaryErr, setminErr] = useState();
     const [maxsalaryErr, setmaxsalaryErr] = useState();
     const [benefitsErr, setbenefitsErr] = useState();
+    const [draftindex, setdraftindex] = useState();
   
     // posts states
     const skills = useRef();
     const [arrskills, setarrskills] = useState([]);
     const[isPosted, setPosted] = useState(false);
+    const [drafts, setdrafts] = useState(()=>{
+        const draftpost = localStorage.getItem('draftspost');
+        return draftpost ? JSON.parse(draftpost) : [];
+    });
     const [posts, setposts] = useState(()=>{
         const saved = localStorage.getItem('posts');
         return saved ? JSON.parse(saved) : [];
@@ -60,6 +64,8 @@ export default function ContextProvider({children}){
         
         localStorage.setItem('posts',JSON.stringify(posts));
         localStorage.setItem('savejobs',JSON.stringify(savejob));
+        localStorage.setItem('draftspost',JSON.stringify(drafts));
+        
         const interval = setTimeout(()=>{
             settitleErr(false);
             setcompanyErr(false);
@@ -73,7 +79,7 @@ export default function ContextProvider({children}){
         },2000);
         
         return ()=> clearTimeout(interval);
-    },[posts, savejob]);
+    },[posts, savejob, drafts]);
 
     
     
@@ -219,15 +225,17 @@ export default function ContextProvider({children}){
                 postDate:day+"/"+month+"/"+year
             }
         ]);
-        skills.current.value = '';
-        setjobtitle('');
-        setcompanyname('');
-        setlocation('');
-        setjobtype('');
-        setdescription('');
-        setminsalary('');
-        setmaxsalary('');
+       
+        drafts.splice(draftindex,1);
         setTimeout(()=>{
+            skills.current.value = '';
+            setjobtitle('');
+            setcompanyname('');
+            setlocation('');
+            setjobtype('');
+            setdescription('');
+            setminsalary('');
+            setmaxsalary('');
             setPosted(true);
             document.querySelector('body').style.overflow = 'hidden';
         },2000);
@@ -290,6 +298,7 @@ export default function ContextProvider({children}){
 
     // saved job handler
     const savejobhandler = (id)=>{
+        
         if(savejob.includes(id)){
             alert('already saved');
             return;
@@ -306,12 +315,70 @@ export default function ContextProvider({children}){
     // render savedjob 
     const savedjobs = posts.filter(post=> savejob.includes(post.id));
 
+    // save as drafts
+
+    const savedrafthandler = ()=>{
+           if(!jobtitle){
+            settitleErr(true);
+            return;
+        }
+        if(!companyname){
+            setcompanyErr(true);
+            return;
+        }
+        if(!location){
+            setlocationErr(true);
+            return;
+        }
+        if(!jobtype){
+            setjobtypeErr(true);
+            return;
+        }
+        if(!description){
+            setdescriptionErr(true);
+            return;
+        }
+        if(arrskills.length === 0){
+            setskillsErr(true);
+            return;
+        }
+        if(!minsalary){
+            setminErr(true);
+            return;
+        }
+        if(!maxsalary){
+            setmaxsalaryErr(true);
+            return;
+        }
+        if(additional.length === 0){
+            setbenefitsErr(true);
+            return;
+        }
+        setdrafts([
+            ...drafts,{
+                id: Date.now(),
+                title:jobtitle,
+                company:companyname,
+                location:location.toLowerCase(),
+                jobType:jobtype.toLowerCase(),
+                description:description,
+                requiredskill:arrskills,
+                minsalar:minsalary,
+                maxsalary:maxsalary,
+                benefits:additional,
+                postDate:day+"/"+month+"/"+year
+            }
+        ]);
+    }
+
+
     return (
         <AppContext.Provider value={{
             show,
             posts,
             skills,
             jobtitle,
+            drafts,
             arrskills,
             companyname,
             location,
@@ -371,7 +438,18 @@ export default function ContextProvider({children}){
             editmaxsalaryhandler,
             deleteeditskillhandler,
             editpost,
-            savejobhandler
+            savejobhandler,
+            savedrafthandler,
+            setjobtitle,
+            setcompanyname,
+            setlocation,
+            setjobtype,
+            setdescription,
+            setminsalary,
+            setarrskills,
+            setadditional,
+            setmaxsalary,
+            setdraftindex
         }}>
             {children}
         </AppContext.Provider>

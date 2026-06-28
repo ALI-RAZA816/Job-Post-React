@@ -44,6 +44,7 @@ export default function PostJob() {
             maxsalaryErr,
             benefitsErr,
             isPosted,
+            savedrafthandler,
             jobtitle,
             getskilllhandler,
             deleteskillhandler} = useContext(AppContext);
@@ -165,7 +166,7 @@ export default function PostJob() {
                             </div>
                             <div className={`mt-4 d-flex flex-column text-center ${style.publishJob}`}>
                                 <button onClick={publishpostHandler}>Publish Job Listing</button>
-                                <button className='mt-2'>Save as Drafts</button>
+                                <button onClick={savedrafthandler} className='mt-2'>Save as Drafts</button>
                                 <span className='d-inline-block mt-3'>By publishing, you agree to our Terms of Service and Privacy Policy. Your listing will be live for 30 days.</span>
                             </div>
                         </div>
