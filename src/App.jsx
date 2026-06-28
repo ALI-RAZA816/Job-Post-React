@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import Navbar from "./component/Navbar";
@@ -16,11 +16,14 @@ import EditPost from "./pages/EditPost";
 import ModalBox from "./component/ModalBox";
 import Draftsjob from "./pages/Draftsjob";
 
+
 function App() {
+  
   return (
     <>
       <ContextProvider>
         <BrowserRouter>
+        <ModalBox />
         <Navbar/>
         <main>
           <Routes>
