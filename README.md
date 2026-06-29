@@ -11,6 +11,7 @@ DevConnect is a React-based job board / recruitment platform where recruiters ca
 - **Edit & Delete Jobs** — Update existing listings or remove them, with saved jobs cleaned up automatically.
 - **Drafts** — Save an in-progress job post as a draft and publish it later.
 - **Job Listings** — Browse all posted jobs with a live search bar in the navbar.
+![image alt](https://github.com/ALI-RAZA816/Job-Post-React/blob/dcda6becf67018b02ef9b414593e2b4da7af3e33/devconnect2.PNG)
 - **Save Jobs** — Bookmark jobs of interest and view them later in a dedicated Saved Jobs page.
 - **Quick Apply** — Applicants can submit an application (name, email, address, GitHub, LinkedIn, portfolio, expected salary range, cover letter) directly from a job listing.
 - **View Applications** — Recruiters can review all applications submitted for their jobs.
