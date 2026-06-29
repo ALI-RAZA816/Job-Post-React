@@ -6,7 +6,6 @@ import style from '../styles/Dashboard.module.css';
 
 // Import various icons from react-icons
 import { MdWorkOutline } from "react-icons/md";
-import { MdOutlineGroup } from "react-icons/md";
 import { AiOutlineThunderbolt } from "react-icons/ai";
 import { FaArrowRight } from "react-icons/fa6";
 import { MdOutlineCalendarToday } from "react-icons/md";
@@ -15,6 +14,8 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { FaRegSave } from "react-icons/fa";
+import { MdOutlineGroup } from "react-icons/md";
+
 
 // Import Link for navigation between routes
 import { Link } from 'react-router-dom';
@@ -30,7 +31,8 @@ import Draftsjob from './Draftsjob';
 
 export default function Dashboard() {
     // Destructure posts, deletepost, editposthandler, and drafts from context
-    const { posts, deletepost, editposthandler, drafts, savejob } = useContext(AppContext);
+    const { posts, deletepost, editposthandler, drafts, savejob, application } = useContext(AppContext);
+    
 
     return (
         <section>
@@ -62,7 +64,7 @@ export default function Dashboard() {
                             <div className={`p-4 ${style.cards} d-flex flex-column rounded-3`}>
                                 <MdOutlineGroup style={{ color: '#4CD7F6' }} className='fs-2 mb-3' />
                                 <span>Total Applicants</span>
-                                <h2 className='mt-1'>12</h2>
+                                <h2 className='mt-1'>{application.length <= 9 ? `0${application.length}` : application.length}</h2>
                             </div>
                         </Link>
                     </div>
@@ -101,6 +103,7 @@ export default function Dashboard() {
                         <div className="postedJobs">
                             {/* If no posts, show the NoPost component; otherwise map through posts */}
                             {posts.length === 0 ? <NoPost /> : posts.map((item, index) => {
+                                 const applicantCount = application.filter(app => app.jobid === item.id).length;
                                 return (
                                     <div key={index} className={`${style.jobcards} mb-3 p-4 d-md-flex justify-content-between rounded-3`}>
                                         <div>
@@ -113,7 +116,10 @@ export default function Dashboard() {
                                                 })}
                                             </div>
                                             {/* Post date */}
-                                            <span><MdOutlineCalendarToday className='fs-6 me-2' />{item.postDate}</span>
+                                            <div className='d-flex'>
+                                                <span className='d-inline-flex mb-0 me-2'><MdOutlineGroup className='fs-5 me-2'/>{applicantCount} Applicants</span>
+                                                <span className='d-inline-flex mb-0'><MdOutlineCalendarToday className='fs-6 me-2' />Posted: {item.postDate}</span>
+                                            </div>
                                         </div>
                                         {/* Action buttons: edit, delete, view applications */}
                                         <div className='d-flex justify-content-start align-items-center'>
@@ -125,9 +131,7 @@ export default function Dashboard() {
                                             <div onClick={() => deletepost(index)} className={`${style.delete} me-3 rounded-3`}>
                                                 <RiDeleteBinLine />
                                             </div>
-                                            <Link to="/view">
-                                                <button className={`${style.viewApplication}`}>View Application</button>
-                                            </Link>
+                                            <Link to='/applications'><button className={`${style.viewApplication}`}>View Applicants</button></Link>
                                         </div>
                                     </div>
                                 )
@@ -136,8 +140,8 @@ export default function Dashboard() {
                     </div>
 
                     {/* Right column - Quick Actions sidebar */}
-                    <div className="col-lg-4">
-                        <div className={`${style.quick_Actions} p-4 rounded-3 mt-4`}>
+                    <div className="col-lg-4 position-relative">
+                        <div className={`${style.quick_Actions} p-4 rounded-3 mt-4`}  style={{position:'sticky',top:'100px',left:'0'}}>
                             <span className='mb-4 d-inline-flex'>Quick Actions</span>
                             {/* Button to post a new job */}
                             <button className='d-flex justify-content-center align-items-center'>

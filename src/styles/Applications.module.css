@@ -1,0 +1,77 @@
+.heading{
+    color: #DAE2FD;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.applicationContainer table thead tr th{
+    background: #222A3D;
+    color: #DAE2FD;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.applicationContainer table tbody tr td{
+    background: #182234;
+}
+.applicationContainer table thead tr th:first-child{
+    border-top-left-radius: 5px;
+}
+.applicationContainer table thead tr th:last-child{
+    border-top-right-radius: 5px;
+}
+
+.profile{
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    border: 1px solid #DAE2FD;
+}
+
+.user{
+    color: #DAE2FD;
+}
+
+.userDetail span:first-child{
+    color: #DAE2FD;
+    font-weight: bold ;
+    font-size: 14px;
+}
+.userDetail span:last-child{
+    color: #707385;
+    font-weight: bold ;
+    font-size: 13px;
+}
+
+.role p{
+    margin-bottom: 5px;
+    line-height: 15px;
+    font-weight: bold ;
+    color: #DAE2FD;
+}
+
+.role span{
+    display: inline-flex;
+    font-size: 13px;
+    padding: .3rem .5rem ;
+    border-radius: 5px;
+    background-color: #70738528;
+    color: rgb(0, 255, 255);
+}
+
+.delete,
+.view,
+.date{
+    color: #707385 !important;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.view:hover{
+    color: #DAE2FD !important;
+    cursor: pointer;
+}
+
+.delete:hover{
+    cursor: pointer;
+    color: rgb(138, 18, 18) !important;
+}

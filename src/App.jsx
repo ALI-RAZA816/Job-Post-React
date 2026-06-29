@@ -15,6 +15,7 @@ import ViewApplication from "./pages/ViewApplication";
 import EditPost from "./pages/EditPost";
 import ModalBox from "./component/ModalBox";
 import Draftsjob from "./pages/Draftsjob";
+import Applications from "./pages/Applications";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path='/view' element={<ViewApplication/>}/>
             <Route path='/edit' element={<EditPost/>}/>
             <Route path='/drafts' element={<Draftsjob/>}/>
+            <Route path='/applications' element={<Applications/>}/>
           </Routes>
         </main>
         <Footer/>

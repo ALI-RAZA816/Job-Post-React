@@ -1,5 +1,5 @@
 // Import React to enable JSX and component creation
-import React from 'react'
+import React, { useContext } from 'react'
 
 // Import custom CSS module for styling this component
 import style from '../styles/ApplyJobForm.module.css';
@@ -14,8 +14,12 @@ import { IoMdTime } from "react-icons/io";
 import { MdOutlinePayments } from "react-icons/md";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { VscSend } from "react-icons/vsc";
+import { AppContext } from '../context/AppContext';
 
 export default function ApplyJobForm() {
+
+  const {applicantJob, applyjobChangeHandler, submitApplication, quickApply, applyErr} = useContext(AppContext);
+
   return (
     <section>
       {/* Main container with Bootstrap grid */}
@@ -30,58 +34,32 @@ export default function ApplyJobForm() {
                   <img src={image} alt="" />
                 </div>
                 <div>
-                  <h2 className='mb-0 fw-bold'>Senior Rust Engineer</h2>
-                  <p className='mb-0'>CloudSphere Systems</p>
+                  <h2 className='mb-0 fw-bold'>{applicantJob.title}</h2>
+                  <p className='mb-0'>{applicantJob.company}</p>
                 </div>
               </div>
               {/* Job metadata: type, location, salary */}
               <div className={`${style.jobtype} d-flex mt-3`}>
                 <span className='d-flex me-2 align-items-center rounded-5 px-2 py-1'>
-                  <MdPublic className='fs-6 me-2' />Remote
+                  <MdPublic className='fs-6 me-2' />{applicantJob.location}
                 </span>
                 <span className='d-flex me-2 align-items-center rounded-5 px-2 py-1'>
-                  <IoMdTime className='fs-6 me-2' />Full-time
+                  <IoMdTime className='fs-6 me-2' />{applicantJob.jobType}
                 </span>
                 <span className='d-flex me-2 align-items-center rounded-5 px-2 py-1'>
-                  <MdOutlinePayments className='fs-6 me-2' />$120k-$120k
+                  <MdOutlinePayments className='fs-6 me-2' />${applicantJob.minsalar}k-${applicantJob.maxsalary}k
                 </span>
               </div>
             </div>
 
             {/* Detailed content: role description, requirements, company info */}
             <div className={`${style.content} mt-5`}>
-              <h3 className='mb-3'>About the Role</h3>
+              <h3 className='mb-3'>Description</h3>
               <p>
-                At CloudSphere Systems, we are building the next generation of distributed edge computing.
-                As a Senior Rust Engineer, you will lead the development of our high-performance core engine,
-                focusing on memory safety, low-latency execution, and WASM-based orchestration. You'll work
-                closely with our infra and protocol teams to push the boundaries of what's possible in
-                decentralized systems.
+                {applicantJob.description}
               </p>
 
-              {/* Requirements section with checkmark icons */}
-              <div className='mt-5'>
-                <h3 className='mb-3'>Requirements</h3>
-                <ul className='nav'>
-                  <li className='d-flex mb-3 align-items-center'>
-                    <AiFillCheckCircle className={`me-2 fs-4`} style={{color:'#4EDEA3'}} />
-                    5+ years of systems programming experience, with 3+ years specifically in Rust.
-                  </li>
-                  <li className='d-flex mb-3 align-items-center'>
-                    <AiFillCheckCircle className={`me-2 fs-4`} style={{color:'#4EDEA3'}} />
-                    5+ years of systems programming experience, with 3+ years specifically in Rust.
-                  </li>
-                  <li className='d-flex mb-3 align-items-center'>
-                    <AiFillCheckCircle className={`me-2 fs-4`} style={{color:'#4EDEA3'}} />
-                    5+ years of systems programming experience, with 3+ years specifically in Rust.
-                  </li>
-                  <li className='d-flex mb-3 align-items-center'>
-                    <AiFillCheckCircle className={`me-2 fs-4`} style={{color:'#4EDEA3'}} />
-                    5+ years of systems programming experience, with 3+ years specifically in Rust.
-                  </li>
-                </ul>
-              </div>
-
+          
               {/* Company information block with logo and description */}
               <div className={`${style.company} mt-4 rounded-3 p-4`}>
                 <h3 className='mb-3'>The Company</h3>
@@ -104,42 +82,48 @@ export default function ApplyJobForm() {
 
           {/* Right column: Quick Apply form */}
           <div className={`col-lg-4 mb-4 mb-lg-0 ${style.quickApply}`}>
-            <form action="" className={`${style.information} rounded-3 p-4`}>
+            <form action="" className={`${style.information} rounded-3 p-4`} >
               <h3>Quick Apply</h3>
               <div>
                 <span>Personal Information</span>
                 {/* Full Name field */}
                 <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
-                  <label htmlFor="" className='form-label mb-1'>Full Name</label>
-                  <input type="text" className='bg-transparent border-0 text-white' />
+                  <label htmlFor=""  className='form-label mb-1'>Full Name</label>
+                  <input type="text" name='fullname' value={quickApply.fullname} onChange={applyjobChangeHandler}  className='bg-transparent border-0 text-white' />
+                {applyErr.nameErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Name is required</span>}
                 </div>
                 {/* Email Address field */}
                 <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
-                  <label htmlFor="" className='form-label mb-1'>Email Address</label>
-                  <input type="text" className='bg-transparent border-0 text-white' />
+                  <label htmlFor=""  className='form-label mb-1'>Email Address</label>
+                  <input type="text" name='email' value={quickApply.email} onChange={applyjobChangeHandler} className='bg-transparent border-0 text-white' />
+                  {applyErr.emailErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Email is required</span>}
                 </div>
                 {/* Address field */}
                 <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
-                  <label htmlFor="" className='form-label mb-1'>Address</label>
-                  <input type="text" className='bg-transparent border-0 text-white' />
+                  <label htmlFor=""  className='form-label mb-1'>Address</label>
+                  <input type="text" name='address' value={quickApply.address} onChange={applyjobChangeHandler} className='bg-transparent border-0 text-white' />
+                  {applyErr.addressErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Address is required</span>}
                 </div>
 
                 <div>
                   <span>Social Links</span>
                   {/* GitHub Profile field */}
                   <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
-                    <label htmlFor="" className='form-label mb-1'>GitHub Profile</label>
-                    <input type="text" className='bg-transparent border-0 text-white' />
+                    <label htmlFor=""  className='form-label mb-1'>GitHub Profile</label>
+                    <input type="text" name='github' value={quickApply.github} onChange={applyjobChangeHandler} className='bg-transparent border-0 text-white' />
+                    {applyErr.githubErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Please provide Github profile</span>}
                   </div>
                   {/* LinkedIn Profile field */}
                   <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
                     <label htmlFor="" className='form-label mb-1'>Linkedin Profile</label>
-                    <input type="text" className='bg-transparent border-0 text-white' />
+                    <input type="text" name='linkedin'  value={quickApply.linkedin} onChange={applyjobChangeHandler}  className='bg-transparent border-0 text-white' />
+                    {applyErr.linkedinErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Please provide Linkedin profile</span>}
                   </div>
                   {/* Portfolio Website field */}
                   <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
                     <label htmlFor="" className='form-label mb-1'>Portfolio Website</label>
-                    <input type="text" className='bg-transparent border-0 text-white' />
+                    <input type="text" name='portfolio' value={quickApply.portfolio} onChange={applyjobChangeHandler}  className='bg-transparent border-0 text-white' />
+                    {applyErr.portfolioErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Please provide Portfolio profile</span>}
                   </div>
                 </div>
 
@@ -149,12 +133,14 @@ export default function ApplyJobForm() {
                     {/* Expected Salary (Min) field */}
                     <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
                       <label htmlFor="" className='form-label mb-1'>Expected Salary (Min USD)</label>
-                      <input type="number" className='bg-transparent border-0 text-white' />
+                      <input type="number" name='minsalary'  value={quickApply.minsalary} onChange={applyjobChangeHandler}  className='bg-transparent border-0 text-white' />
+                      {applyErr.minsalaryErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Please provide Min expected salary</span>}
                     </div>
                     {/* Expected Salary (Max) field */}
                     <div className={`form-control d-flex flex-column mb-3 ${style.field}`}>
                       <label htmlFor="" className='form-label mb-1'>Expected Salary (Max USD)</label>
-                      <input type="number" className='bg-transparent border-0 text-white' />
+                      <input type="number" name='maxsalary'  value={quickApply.maxsalary} onChange={applyjobChangeHandler}  className='bg-transparent border-0 text-white' />
+                      {applyErr.maxsalaryErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Please provide Max expected salary</span>}
                     </div>
                   </div>
                 </div>
@@ -163,11 +149,12 @@ export default function ApplyJobForm() {
               {/* Cover Letter textarea */}
               <div className={`${style.coverLetter} mt-3`}>
                 <label htmlFor='' className='form-label'>Cover Letter</label>
-                <textarea name="" className='form-control' placeholder='Why are you the perfect fit for this role?' id=""></textarea>
+                <textarea name="letter" value={quickApply.letter} onChange={applyjobChangeHandler} className='form-control' placeholder='Why are you the perfect fit for this role?' id=""></textarea>
+                {applyErr.maxsalaryErr && <span className='text-danger text-capitalize d-inline-flex mb-0' style={{fontSize:'12px'}}>Field is required</span>}
               </div>
 
               {/* Submit application button */}
-              <button className='d-flex align-items-center mt-3 py-2 justify-content-center btn'>
+              <button onClick={(event)=> submitApplication(event,applicantJob.id,applicantJob.title, applicantJob.requiredskill)} className='d-flex align-items-center mt-3 py-2 justify-content-center btn'>
                 Submit Application<VscSend className='ms-2' />
               </button>
               {/* Save for later button */}

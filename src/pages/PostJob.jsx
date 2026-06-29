@@ -24,7 +24,7 @@ import ModalBox from '../component/ModalBox';
 
 export default function PostJob() {
     // Static arrays for job types and benefit options
-    const jobTypes = ['Full-time', 'Contract', 'Part-time', 'Freelance', 'Internship'];
+    const jobTypes = ['Full-time', 'Contract', 'Part-time', 'Freelance', 'Internship','Remote'];
     const additionbenefits = ["Remote-first", "Health Insurance", "401(k) Match", "Paid Time off", "Learning Budget", "Home Office Stipend"];
 
     // Destructure all needed state and handlers from AppContext
@@ -167,7 +167,7 @@ export default function PostJob() {
                                             {/* Render existing skill tags with delete icons */}
                                             {arrskills.map((item, index) => {
                                                 return (
-                                                    <span className='me-2 text-nowrap my-1 mt-md-0'>
+                                                    <span className='me-2 text-nowrap text-capitalize my-1 mt-md-0'>
                                                         {item}
                                                         <RxCross2
                                                             onClick={() => deleteskillhandler(index)}

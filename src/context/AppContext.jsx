@@ -1,5 +1,5 @@
 import { createContext, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useAsyncError, useNavigate } from "react-router-dom";
 
 // Create a context object that will be used to share state across components
 export const AppContext = createContext();
@@ -11,22 +11,54 @@ export default function ContextProvider({ children}) {
   const year = date.getFullYear();
   const day = date.getDate();
 
-
+  // Action Message
   const [modalMsg, setmodalMsg] = useState('post');
   const [isPosted, setPosted] = useState(false); // flag to show success modal
+  
+  // application detal state
+  const [viewDetail, setviewDetail] = useState(null);
 
+  // Get Job Detail for Apply
+  const [applicantJob, setjapplicantJob] = useState(()=>{
+    const applicant = localStorage.getItem("applicant");
+    return applicant ? JSON.parse(applicant) : [];
+  });
+
+
+  // fullname emailaddress address github linkedin portfolio minsalary maxsalary letter
+  const [quickApply, setquickApply] = useState({
+    jobid:'',
+    fullname:'',
+    email:'',
+    address:'',
+    github:'',
+    linkedin:'',
+    portfolio:'',
+    minsalary:'',
+    maxsalary:'',
+    role:'',
+    letter:'',
+    skills:'',
+    applydate:''
+  });
+
+
+  const [application, setapplication] = useState(()=>{
+    const savedApplication = localStorage.getItem('applications');
+    return savedApplication ? JSON.parse(savedApplication) : [];
+  });
 
   // ----- Error state booleans for form validation -----
-  const [titleErr, settitleErr] = useState();
-  const [companyErr, setcompanyErr] = useState();
-  const [locationErr, setlocationErr] = useState();
-  const [jobtypeErr, setjobtypeErr] = useState();
-  const [descriptionErr, setdescriptionErr] = useState();
-  const [skillsErr, setskillsErr] = useState();
-  const [minsalaryErr, setminErr] = useState();
-  const [maxsalaryErr, setmaxsalaryErr] = useState();
-  const [benefitsErr, setbenefitsErr] = useState();
-  const [draftindex, setdraftindex] = useState(); // index of draft being published
+  const [titleErr, settitleErr] = useState(false);
+  const [companyErr, setcompanyErr] = useState(false);
+  const [locationErr, setlocationErr] = useState(false);
+  const [jobtypeErr, setjobtypeErr] = useState(false);
+  const [descriptionErr, setdescriptionErr] = useState(false);
+  const [skillsErr, setskillsErr] = useState(false);
+  const [minsalaryErr, setminErr] = useState(false);
+  const [maxsalaryErr, setmaxsalaryErr] = useState(false);
+  const [benefitsErr, setbenefitsErr] = useState(false);
+  const [draftindex, setdraftindex] = useState(false); // index of draft being published
 
   // ----- Refs and state for post creation -----
   const skills = useRef(); // reference to the skills input
@@ -80,6 +112,8 @@ export default function ContextProvider({ children}) {
     localStorage.setItem("posts", JSON.stringify(posts));
     localStorage.setItem("savejobs", JSON.stringify(savejob));
     localStorage.setItem("draftspost", JSON.stringify(drafts));
+    localStorage.setItem('applications',JSON.stringify(application));
+    localStorage.setItem('applicant',JSON.stringify(applicantJob));
 
     // Clear error messages after 2 seconds
     const interval = setTimeout(() => {
@@ -95,7 +129,7 @@ export default function ContextProvider({ children}) {
     }, 2000);
 
     return () => clearTimeout(interval);
-  }, [posts, savejob, drafts]);
+  }, [posts, savejob, drafts, application, applicantJob]);
 
   // ----- Input change handlers for the main form -----
   const titlehandler = (event) => setjobtitle(event.target.value);
@@ -270,7 +304,7 @@ export default function ContextProvider({ children}) {
   // ----- Hide the success modal -----
   const hidemodalbox = () => {
     setPosted(false);
-     skills.current.value = "";
+    //  skills.current.value = "";
       setjobtitle("");
       setcompanyname("");
       setlocation("");
@@ -410,6 +444,123 @@ export default function ContextProvider({ children}) {
     setPosted(true);
   };
 
+ 
+  const applyjobChangeHandler = (event)=>{
+    const {name, value} = event.target;
+    setquickApply((prev)=>({
+      ...prev,
+      [name]:value
+    }));
+  }
+
+  const [applyErr, setapplyErr] = useState({
+    nameErr:false,
+    emailErr:false,
+    addressErr:false,
+    githubErr:false,
+    linkedinErr:false,
+    portfolioErr:false,
+    minsalaryErr:false,
+    maxsalaryErr:false,
+    letterErr:false
+
+  });
+
+  const submitApplication = (event, id, title, skill)=>{
+    event.preventDefault();
+    if(!quickApply.fullname){
+      setapplyErr((prev)=>({
+        ...prev,
+        nameErr:true
+      }));
+      return;
+    }
+    if(!quickApply.email){
+      setapplyErr((prev)=>({
+        ...prev,
+        emailErr:true
+      }));
+      return;
+    }
+    if(!quickApply.address){
+      setapplyErr((prev)=>({
+        ...prev,
+        addressErr:true
+      }));
+      return;
+    }
+    if(!quickApply.github){
+      setapplyErr((prev)=>({
+        ...prev,
+        githubErr:true
+      }));
+      return;
+    }
+    if(!quickApply.linkedin){
+      setapplyErr((prev)=>({
+        ...prev,
+        linkedinErr:true
+      }));
+      return;
+    }
+    if(!quickApply.portfolio){
+      setapplyErr((prev)=>({
+        ...prev,
+        portfolioErr:true
+      }));
+      return;
+    }
+    if(!quickApply.minsalary){
+      setapplyErr((prev)=>({
+        ...prev,
+        minsalaryErr:true
+      }));
+      return;
+    }
+    if(!quickApply.maxsalary){
+      setapplyErr((prev)=>({
+        ...prev,
+        maxsalaryErr:true
+      }));
+      return;
+    }
+    if(!quickApply.letter){
+      setapplyErr((prev)=>({
+        ...prev,
+        letterErr:true
+      }));
+      return;
+    }
+    const data ={
+      ...quickApply,
+      jobid:id,
+      role:title,
+      skills:skill,
+      applydate:day + "/" + month + "/" + year,
+    }
+    setapplication([...application, data]);
+    setPosted(true);
+    setmodalMsg('application');
+    setquickApply({
+      fullname: '',
+      email: '',
+      address: '',
+      github: '',
+      linkedin: '',
+      portfolio: '',
+      minsalary: '',
+      maxsalary: '',
+      skills:'',
+      letter: ''
+    });
+    
+  }
+  
+
+  // Search posts
+  const [searchQuery , setSearchQuery ]= useState('');
+ 
+
   // ----- Provide all state and handlers via context -----
   return (
     <AppContext.Provider
@@ -420,9 +571,11 @@ export default function ContextProvider({ children}) {
         jobtitle,
         drafts,
         arrskills,
+        viewDetail,
         companyname,
         location,
         jobtype,
+        applicantJob,
         description,
         minsalary,
         maxsalary,
@@ -431,6 +584,7 @@ export default function ContextProvider({ children}) {
         editjobtitle,
         editcompanyname,
         savedjobs,
+        searchQuery,
         editlocation,
         editjobtype,
         editdescription,
@@ -447,16 +601,22 @@ export default function ContextProvider({ children}) {
         descriptionErr,
         skillsErr,
         isPosted,
+        applyErr,
         minsalaryErr,
         maxsalaryErr,
         benefitsErr,
+        quickApply,
         editskills,
+        application,
         geteditskilllhandler,
+        setSearchQuery,
         companynamehandler,
+        setjapplicantJob,
         locationhandler,
         jobtypehandler,
         descriptionhandler,
         minsalaryhandler,
+        setviewDetail,
         hidemodalbox,
         maxsalaryhandler,
         deletesavejobhandler,
@@ -465,6 +625,7 @@ export default function ContextProvider({ children}) {
         showSidebar,
         hideSidebar,
         titlehandler,
+        applyjobChangeHandler,
         editposthandler,
         getskilllhandler,
         additionalhandler,
@@ -491,6 +652,8 @@ export default function ContextProvider({ children}) {
         setadditional,
         setmaxsalary,
         setdraftindex,
+        submitApplication,
+        setapplication,
       }}
     >
       {children}

@@ -14,10 +14,14 @@ import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     // Destructure show, showSidebar, and hideSidebar from context
-    const {show, showSidebar, hideSidebar} = useContext(AppContext);
+    const {show, showSidebar, hideSidebar, setSearchQuery, searchQuery} = useContext(AppContext);
+
+    const searchHandler = (event)=>{
+        setSearchQuery(event.target.value);
+    }
 
     return (
-        <header className='py-3 border border-secondary border-start-0 border-end-0'>
+        <header style={{position:'sticky',top:'0',left:'0',zIndex:'99',backgroundColor:'#0D1629'}} className='py-3 border border-secondary border-start-0 border-end-0'>
             <nav className={style.navbar}>
                 <div className="container d-flex justify-content-between align-items-center">
                     <div className='d-flex align-items-center'>
@@ -37,12 +41,10 @@ export default function Navbar() {
                         {/* Search bar - hidden on smaller screens */}
                         <div className={`${style.search} d-none d-md-flex align-items-center rounded-2`}>
                             <IoSearchSharp className='text-white mx-2 fs-5' />
-                            <input type="text" className={`${style.search_box} border-0 bg-transparent`} placeholder='Search talent....' />
+                            <input type="text" onChange={searchHandler} value={searchQuery} className={`${style.search_box} border-0 bg-transparent`} placeholder='Search talent....' />
                         </div>
                         {/* Notification bell icon */}
                         <FaRegBell className={`${style.bell} mx-4`}/>
-                        {/* Dark mode toggle icon */}
-                        <MdOutlineDarkMode className={`${style.darkmode}  me-3`} />
                         {/* Button to navigate to the post job page */}
                         <Link to='/postjob'>
                             <button className={`btn text-nowrap ${style.post_job}`}>Post Job</button>

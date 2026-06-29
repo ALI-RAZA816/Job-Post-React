@@ -4,7 +4,7 @@ import { IoFilterSharp } from "react-icons/io5";
 import image from '../assets/asrew7982304021341asdfjlSLDJKFOWERLKJA32423asfasdf.PNG';
 import { CiLocationOn } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import NoPost from '../component/NoPost';
 import { IoBookmark } from "react-icons/io5";
@@ -21,7 +21,10 @@ export default function Jobs() {
   ];
 
   // ── Context data ──
-  const { posts, savejobhandler, savejob } = useContext(AppContext);
+  const { posts, savejobhandler, savejob, setjapplicantJob, searchQuery} = useContext(AppContext);
+
+  // Navigation 
+   const navigate = useNavigate();
 
   // ── Filter state ──
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -73,9 +76,29 @@ export default function Jobs() {
         }
       }
 
+      // 4. Search query filter
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase().trim();
+        const inTitle = post.title.toLowerCase().includes(query);
+        const inCompany = post.company.toLowerCase().includes(query);
+        const inSkills = post.requiredskill.some(skill =>
+          skill.toLowerCase().includes(query)
+        );
+        // Also include description if you want
+        // const inDescription = post.description.toLowerCase().includes(query);
+        if (!inTitle && !inCompany && !inSkills) {
+          return false;
+        }
+      }
       return true;
     });
-  }, [posts, selectedSkills, selectedLocation, selectedJobType]);
+  }, [posts, selectedSkills, selectedLocation, selectedJobType, searchQuery]);
+
+  // Get Job Detail for Application
+  const getjobdetail = (index)=>{
+    setjapplicantJob(posts[index]);
+    navigate('/applyjob');
+  }
 
   // ── Render ──
   return (
@@ -83,8 +106,8 @@ export default function Jobs() {
       <div className="container">
         <div className="row py-3 min-vh-100">
           {/* ─── Filters Sidebar ─── */}
-          <div className="col-lg-3">
-            <div className={style.filter_container}>
+          <div className="col-lg-3" >
+            <div className={style.filter_container} style={{position:'sticky',top:'100px',left:'0'}}>
               <form>
                 <h3 className='fs-4 mb-3 d-flex fw-bold'>
                   <IoFilterSharp className='me-3 fs-3' />Filters
@@ -198,9 +221,7 @@ export default function Jobs() {
                             >
                               {savejob.includes(item.id) ? <IoBookmark /> : <CiBookmark />}
                             </div>
-                            <Link to="/applyjob">
-                              <button className='btn'>Apply Now</button>
-                            </Link>
+                              <button onClick={()=> getjobdetail(index)} className='btn'>Apply Now</button>
                           </div>
                         </div>
                       </div>

@@ -43,17 +43,17 @@ export default function SavedJob() {
                                             </div>
                                             {/* Job details */}
                                             <div className={`${style.job_details} w-100`}>
-                                                <h3 className='mb-3'>Senior Frontend Engineer</h3>
+                                                <h3 className='mb-3'>{item.title}</h3>
                                                 <ul>
-                                                    <li>Linear</li>
-                                                    <li><CiLocationOn className='fs-6 me-2' />San Francisco (Remote)</li>
+                                                    <li>{item.company}</li>
+                                                    <li className='text-capitalize'><CiLocationOn className='fs-6 me-2' />{item.location} ({item.jobType})</li>
                                                 </ul>
                                                 {/* Required tech stack tags */}
                                                 <div className={`${style.tech_stacks} mt-2`}>
-                                                    <button>React</button>
-                                                    <button>Next.js</button>
-                                                    <button>TypeScript</button>
-                                                    <button>Tailwand</button>
+                                                    {item.requiredskill.map((item,i)=>{
+                                                        return <button className='text-capitalize text-nowrap' key={i}>{item}</button>
+                                                    })}
+                                                    
                                                 </div>
                                                 {/* Salary and action buttons */}
                                                 <div className={`${style.price} mt-4`}>

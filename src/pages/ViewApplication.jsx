@@ -1,5 +1,5 @@
 // Import React to enable JSX and component creation
-import React from 'react'
+import React, { useContext } from 'react'
 
 // Import custom CSS module for styling the ViewApplication component
 import style from '../styles/ViewApplication.module.css';
@@ -16,14 +16,17 @@ import { CiLinkedin } from "react-icons/ci";
 import { HiExternalLink } from "react-icons/hi";
 import { FaRegCalendar } from "react-icons/fa6";
 import { RxCrossCircled } from "react-icons/rx";
+import { AppContext } from '../context/AppContext';
+import { Link } from 'react-router-dom';
 
 export default function ViewApplication() {
+    const {userApplication, viewDetail} = useContext(AppContext);
     return (
         <section>
             <div className="container">
                 <div className="row py-4">
                     {/* Page heading */}
-                    <h1 className={`${style.applicationHd} mb-4`}>Senior Rust Engineer Application</h1>
+                    <h1 className={`${style.applicationHd} mb-4`}>{viewDetail.role}</h1>
 
                     {/* Left column: Applicant profile, cover letter, and details */}
                     <div className="col-lg-8">
@@ -38,9 +41,9 @@ export default function ViewApplication() {
                                 <div className="col-10">
                                     <div className="d-flex justify-content-between align-items-center pb-3">
                                         <div className='ms-3'>
-                                            <h3>Alex Chen</h3>
-                                            <p>Senior Developer @</p>
-                                            <p>Email</p>
+                                            <h3>{viewDetail.fullname}</h3>
+                                            <p>{viewDetail.role}</p>
+                                            <p>{viewDetail.email}</p>
                                         </div>
                                         {/* Email and Message action buttons */}
                                         <div className='d-md-flex align-items-center '>
@@ -56,11 +59,11 @@ export default function ViewApplication() {
                                     <div className={`${style.additional} border border-secondary border-bottom-0 pt-2 border-start-0 border-end-0 d-flex justify-content-between align-items-center`}>
                                         <div className='d-flex ps-3 flex-column'>
                                             <span className='fw-bold'>Location</span>
-                                            <span className='fw-bold'>San Francisco, CA</span>
+                                            <span className='fw-bold'>{viewDetail.address}</span>
                                         </div>
                                         <div className='d-flex flex-column'>
                                             <span className='fw-bold'>Desired Salary</span>
-                                            <span className='fw-bold'>$120k - $150k</span>
+                                            <span className='fw-bold'>${viewDetail.minsalary}k - ${viewDetail.maxsalary}k</span>
                                         </div>
                                     </div>
                                 </div>
@@ -71,19 +74,12 @@ export default function ViewApplication() {
                                 <div className='d-flex border-bottom align-items-center py-3 px-4 justify-content-between'>
                                     <span className='fs-5 mb-0 d-inline-flex'>Cover Letter</span>
                                     <span className='text-uppercase d-inline-flex mb-0'>
-                                        Submitted at : <span className='fw-normal'>2026/05/06</span>
+                                        Submitted at : <span className='fw-normal'>{viewDetail.applydate}</span>
                                     </span>
                                 </div>
-                                <div className={`${style.letter} py-3 px-4`}>
-                                    <p>
-                                        Dear Hiring Team,<br /><br />
-                                        I’ve been following DevConnect’s progress in the high-performance computing space for quite some time, and I am thrilled to apply for the Senior Rust Engineer position. With over 8 years of experience in systems programming and a deep passion for memory safety and concurrency, I believe I can make significant contributions to your core infrastructure. <br /><br />
-                                        In my current role at CloudScale Systems, I led the migration of our data ingestion pipeline from Python to Rust, resulting in a 40% reduction in latency and a 60% decrease in cloud infrastructure costs. I am particularly interested in how DevConnect utilizes WASM for edge computing, a field where I have recently published several open-source modules. <br /><br />
-                                        I look forward to discussing how my technical background in high-concurrency systems can help DevConnect scale its next generation of services.
-                                        <br />
-                                        <br />
-                                        Best regards,
-                                        Alex Chen
+                                <div className={`${style.letter} text-wrap py-3 px-4`}>
+                                    <p className='text-wrap'>
+                                       {viewDetail.letter}
                                     </p>
                                 </div>
                             </div>
@@ -96,13 +92,13 @@ export default function ViewApplication() {
                         <div className={`${style.social_links} p-4 rounded-3`}>
                             <span className='fs-5 d-inline-flex mb-3'>Professional Links</span>
                             <div className='mb-2 github d-flex align-items-center rounded-2 py-2 px-3'>
-                                <IoIosCode className='me-2 fs-5' /> GitHub Profile<HiExternalLink className={style.shareLink} />
+                                <a href={viewDetail.github} target='blank' className='text-decoration-none' style={{color:'#8E9AFF'}}><IoIosCode className='me-2 fs-5' /> GitHub Profile<HiExternalLink className={style.shareLink} /></a>
                             </div>
                             <div className='mb-2 portfolio d-flex align-items-center rounded-2 py-2 px-3'>
-                                <GrLanguage className='me-2 fs-5' />Porftolio Link<HiExternalLink className={style.shareLink} />
+                                <a href={viewDetail.portfolio} target='blank' className='text-decoration-none' style={{color:'#8E9AFF'}}><GrLanguage className='me-2 fs-5' />Porftolio Link<HiExternalLink className={style.shareLink} /></a>
                             </div>
                             <div className='mb-2 linkedin d-flex align-items-center rounded-2 py-2 px-3'>
-                                <CiLinkedin className='me-2 fs-5' />Linkedin<HiExternalLink className={style.shareLink} />
+                               <a href={viewDetail.linkedin} target='blank' className='text-decoration-none' style={{color:'#8E9AFF'}}><CiLinkedin className='me-2 fs-5' />Linkedin<HiExternalLink className={style.shareLink} /></a> 
                             </div>
                         </div>
 
