@@ -2,7 +2,7 @@
 
 DevConnect is a React-based job board / recruitment platform where recruiters can post jobs, manage applications, save drafts, and track applicants — all from a clean, responsive dashboard. Job seekers can browse listings, save jobs, and submit quick applications.
 
-![DevConnect Screenshot](./screenshot.png)
+![image alt](https://github.com/ALI-RAZA816/Job-Post-React/blob/b1b155c4afa789ff6c26d02b32e6ed759b326bdd/devconnect1.PNG)
 
 ## Features
 
